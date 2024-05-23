@@ -25,6 +25,9 @@ public class ClientRepositoryTest {
     private ClientRepository clientRepository;
 
     @Autowired
+    private LoanRepository loanRepository;
+
+    @Autowired
     private BranchRepository branchRepository;
 
     @PersistenceContext
@@ -60,6 +63,10 @@ public class ClientRepositoryTest {
         clientRepository.save(client);
         entityManager.flush();
 
+        assertEquals("Mike", client.getName());
+        assertEquals("Geller", client.getSurname());
+        assertEquals("mikegeller@gmail.com", client.getCredentials().getEmail());
+        assertEquals("123422423", client.getCredentials().getPassword());
         assertEquals(branch.orElseThrow(), client.getRegisteredAt());
         assertTrue(branch.orElseThrow().getClients().contains(client));
         assertTrue(client.getAccounts().isEmpty());
@@ -69,12 +76,15 @@ public class ClientRepositoryTest {
     public void testDeleteClient(){
         Optional<Client> client = clientRepository.findById(1000L);
         Branch branch = client.orElseThrow().getRegisteredAt();
+
         assertEquals(1, client.orElseThrow().getAccounts().size());
+        assertEquals(1, client.orElseThrow().getLoans().size());
 
         clientRepository.delete(client.orElseThrow());
 
         assertFalse(clientRepository.existsById(1000L));
         assertEquals(0, accountRepository.count());
+        assertEquals(0, loanRepository.count());
         assertFalse(branch.getClients().contains(client.orElseThrow()));
     }
 }

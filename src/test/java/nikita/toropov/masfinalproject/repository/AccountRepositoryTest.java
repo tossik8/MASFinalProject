@@ -56,11 +56,12 @@ public class AccountRepositoryTest {
         Optional<Client> client = clientRepository.findById(1000L);
         SavingsAccount account = SavingsAccount.builder()
                 .owner(client.orElseThrow())
-                .interestRate(1)
+                .interestRate(0.01f)
                 .build();
         accountRepository.save(account);
         entityManager.flush();
 
+        assertEquals(0.01f, account.getInterestRate());
         assertTrue(client.orElseThrow().getAccounts().contains(account));
         assertEquals(client.orElseThrow(), account.getOwner());
         assertTrue(account.getAccountNumber().startsWith("61 1090 1014"));
@@ -77,6 +78,7 @@ public class AccountRepositoryTest {
         accountRepository.save(account);
         entityManager.flush();
 
+        assertEquals(100, account.getOverdraftLimit());
         assertTrue(client.orElseThrow().getAccounts().contains(account));
         assertEquals(client.orElseThrow(), account.getOwner());
         assertTrue(account.getAccountNumber().startsWith("61 1090 1014"));
@@ -92,6 +94,7 @@ public class AccountRepositoryTest {
         accountRepository.save(account);
         entityManager.flush();
 
+        assertEquals("Safety", account.getInvestmentObjective());
         assertTrue(client.orElseThrow().getAccounts().contains(account));
         assertEquals(client.orElseThrow(), account.getOwner());
         assertTrue(account.getAccountNumber().startsWith("61 1090 1014"));
@@ -130,6 +133,9 @@ public class AccountRepositoryTest {
         entityManager.refresh(security);
         entityManager.refresh(account);
 
+        assertEquals(53.57f, purchasedSecurity.getPrice());
+        assertEquals(2, purchasedSecurity.getQuantity());
+        assertEquals(LocalDate.now(), purchasedSecurity.getDate().toLocalDate());
         assertTrue(security.getPurchasedSecurities().contains(purchasedSecurity));
         assertTrue(account.getPurchasedSecurities().contains(purchasedSecurity));
         assertEquals(account, purchasedSecurity.getInvestmentAccount());

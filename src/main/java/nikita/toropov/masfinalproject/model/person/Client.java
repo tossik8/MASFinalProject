@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import nikita.toropov.masfinalproject.model.Branch;
 import nikita.toropov.masfinalproject.model.account.Account;
+import nikita.toropov.masfinalproject.model.loan.Loan;
 
 import java.util.HashSet;
 import java.util.List;
@@ -38,6 +39,9 @@ public class Client {
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE)
     private Set<Account> accounts;
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE)
+    private Set<Loan> loans;
 
     @Builder
     public Client(String name, String surname, Credentials credentials, Branch registeredAt){

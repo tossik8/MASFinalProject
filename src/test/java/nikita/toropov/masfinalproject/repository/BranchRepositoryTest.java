@@ -33,6 +33,8 @@ public class BranchRepositoryTest {
         branchRepository.save(branch);
         entityManager.flush();
 
+        assertEquals("A", branch.getName());
+        assertEquals("Koszykowa 86", branch.getAddress());
         assertTrue(branchRepository.existsById(branch.getId()));
     }
 
