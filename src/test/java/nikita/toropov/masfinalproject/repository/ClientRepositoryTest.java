@@ -40,10 +40,7 @@ public class ClientRepositoryTest {
         Client client = Client.builder()
                 .name("Mike")
                 .surname("Geller")
-                .credentials(Credentials.builder()
-                        .email("mgeller@gmail.com")
-                        .password("password")
-                        .build())
+                .credentials(new Credentials("mgeller@gmail.com", "password"))
                 .registeredAt(branch.orElseThrow())
                 .build();
         clientRepository.save(client);

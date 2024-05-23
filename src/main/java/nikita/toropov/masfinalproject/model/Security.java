@@ -10,8 +10,6 @@ import java.util.Set;
 @Data
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Security {
 
     @Id
@@ -29,4 +27,10 @@ public class Security {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<PurchasedSecurity> purchasedSecurities;
+
+    @Builder
+    public Security(String name, String code){
+        setName(name);
+        setCode(code);
+    }
 }

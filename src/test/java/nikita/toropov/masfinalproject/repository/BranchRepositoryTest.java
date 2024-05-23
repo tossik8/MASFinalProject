@@ -48,9 +48,7 @@ public class BranchRepositoryTest {
         Client client = Client.builder()
                 .name("Mike")
                 .surname("Geller")
-                .credentials(Credentials.builder()
-                        .email("fsfs")
-                        .password("fdsfsdffdsdf").build())
+                .credentials(new Credentials("fsfs", "fdsfsdffdsdf"))
                 .registeredAt(branch)
                 .build();
         clientRepository.save(client);

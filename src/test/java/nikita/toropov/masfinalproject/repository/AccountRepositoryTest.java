@@ -122,7 +122,6 @@ public class AccountRepositoryTest {
         PurchasedSecurity purchasedSecurity = PurchasedSecurity.builder()
                 .security(security)
                 .investmentAccount(account)
-                .date(LocalDateTime.now())
                 .price(53.57f)
                 .quantity(2)
                 .build();

@@ -14,8 +14,6 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class PurchasedSecurity {
 
     @Id
@@ -38,4 +36,13 @@ public class PurchasedSecurity {
 
     @Min(1)
     private int quantity;
+
+    @Builder
+    public PurchasedSecurity(Security security, InvestmentAccount investmentAccount, float price, int quantity){
+        setSecurity(security);
+        setInvestmentAccount(investmentAccount);
+        setPrice(price);
+        setQuantity(quantity);
+        date = LocalDateTime.now();
+    }
 }

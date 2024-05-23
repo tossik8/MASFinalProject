@@ -10,8 +10,6 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Branch {
 
     @Id
@@ -28,4 +26,10 @@ public class Branch {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<Client> clients;
+
+    @Builder
+    public Branch(String name, String address){
+        setName(name);
+        setAddress(address);
+    }
 }
