@@ -17,29 +17,12 @@ public class SavingsAccount extends Account{
     @Min(0)
     private static int transferLimit = 6;
 
+    @Min(0)
     private float interestRate;
 
     @Builder
-    public SavingsAccount(Client owner){
+    public SavingsAccount(Client owner, float interestRate){
         super(owner);
-        setInterestRate();
-    }
-
-    @Override
-    public void setBalance(float balance) {
-        super.setBalance(balance);
-        setInterestRate();
-    }
-
-    public void setInterestRate() {
-        if(this.getBalance() <= 1000){
-            this.interestRate = 1;
-        }
-        else if(this.getBalance() <= 2000){
-            this.interestRate = 1.5f;
-        }
-        else{
-            this.interestRate = 2;
-        }
+        setInterestRate(interestRate);
     }
 }

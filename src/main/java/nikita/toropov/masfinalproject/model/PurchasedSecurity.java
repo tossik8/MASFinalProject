@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import nikita.toropov.masfinalproject.model.account.InvestmentAccount;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -31,7 +31,7 @@ public class PurchasedSecurity {
     private InvestmentAccount investmentAccount;
 
     @NotNull
-    private LocalDate date;
+    private LocalDateTime date;
 
     @Min(0)
     private float price;

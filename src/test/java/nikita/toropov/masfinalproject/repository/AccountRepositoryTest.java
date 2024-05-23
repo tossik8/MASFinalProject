@@ -4,16 +4,20 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import nikita.toropov.masfinalproject.model.PurchasedSecurity;
 import nikita.toropov.masfinalproject.model.Security;
-import nikita.toropov.masfinalproject.model.account.Account;
 import nikita.toropov.masfinalproject.model.account.CheckingAccount;
 import nikita.toropov.masfinalproject.model.account.InvestmentAccount;
 import nikita.toropov.masfinalproject.model.person.Client;
 import nikita.toropov.masfinalproject.model.account.SavingsAccount;
+import nikita.toropov.masfinalproject.repository.account.AccountRepository;
+import nikita.toropov.masfinalproject.repository.account.CheckingAccountRepository;
+import nikita.toropov.masfinalproject.repository.account.InvestmentAccountRepository;
+import nikita.toropov.masfinalproject.repository.account.SavingsAccountRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,6 +28,15 @@ public class AccountRepositoryTest {
 
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    private CheckingAccountRepository checkingAccountRepository;
+
+    @Autowired
+    private SavingsAccountRepository savingsAccountRepository;
+
+    @Autowired
+    private InvestmentAccountRepository investmentAccountRepository;
 
     @Autowired
     private SecurityRepository securityRepository;
@@ -43,6 +56,7 @@ public class AccountRepositoryTest {
         Optional<Client> client = clientRepository.findById(1000L);
         SavingsAccount account = SavingsAccount.builder()
                 .owner(client.orElseThrow())
+                .interestRate(1)
                 .build();
         accountRepository.save(account);
         entityManager.flush();
@@ -86,9 +100,9 @@ public class AccountRepositoryTest {
 
     @Test
     public void testFetchAccount(){
-        Optional<Account> account1 = accountRepository.findById(1000L);
+        Optional<CheckingAccount> account1 = checkingAccountRepository.findById(1000L);
 
-        assertEquals(100, ((CheckingAccount) account1.orElseThrow()).getOverdraftLimit());
+        assertEquals(100, (account1.orElseThrow()).getOverdraftLimit());
     }
 
     @Test
@@ -105,7 +119,7 @@ public class AccountRepositoryTest {
         PurchasedSecurity purchasedSecurity = PurchasedSecurity.builder()
                 .security(security)
                 .investmentAccount(account)
-                .date(LocalDate.now())
+                .date(LocalDateTime.now())
                 .price(53.57f)
                 .quantity(2)
                 .build();
