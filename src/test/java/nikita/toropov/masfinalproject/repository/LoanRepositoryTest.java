@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -78,10 +77,10 @@ public class LoanRepositoryTest {
 
     @Test
     public void testFetchLoan(){
-        Optional<Loan> loan = loanRepository.findById(1000L);
+        Loan loan = loanRepository.findById(1000L).orElseThrow();
 
-        assertEquals(10000, ((TermLoan) loan.orElseThrow()).getPrincipal());
-        assertEquals(LocalDate.of(2025, 1, 1), ((TermLoan) loan.orElseThrow()).getMaturityDate());
+        assertEquals(10000, ((TermLoan) loan).getPrincipal());
+        assertEquals(LocalDate.of(2025, 1, 1), ((TermLoan) loan).getMaturityDate());
     }
 
     @Test

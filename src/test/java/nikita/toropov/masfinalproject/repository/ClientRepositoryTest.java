@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -37,12 +36,12 @@ public class ClientRepositoryTest {
 
     @Test
     public void testCreateInvalidClient(){
-        Optional<Branch> branch = branchRepository.findById(1000L);
+        Branch branch = branchRepository.findById(1000L).orElseThrow();
         Client client = Client.builder()
                 .name("Mike")
                 .surname("Geller")
                 .credentials(new Credentials("mgeller@gmail.com", "password"))
-                .registeredAt(branch.orElseThrow())
+                .registeredAt(branch)
                 .build();
         clientRepository.save(client);
 
@@ -51,12 +50,12 @@ public class ClientRepositoryTest {
 
     @Test
     public void testCreateValidClient(){
-        Optional<Branch> branch = branchRepository.findById(1000L);
+        Branch branch = branchRepository.findById(1000L).orElseThrow();
         Client client = Client.builder()
                 .name("Mike")
                 .surname("Geller")
                 .credentials(new Credentials("mikegeller@gmail.com", "123422423"))
-                .registeredAt(branch.orElseThrow())
+                .registeredAt(branch)
                 .build();
         clientRepository.save(client);
         entityManager.flush();
@@ -66,24 +65,24 @@ public class ClientRepositoryTest {
         assertEquals("Geller", client.getSurname());
         assertEquals("mikegeller@gmail.com", client.getCredentials().getEmail());
         assertEquals("123422423", client.getCredentials().getPassword());
-        assertEquals(branch.orElseThrow(), client.getRegisteredAt());
-        assertTrue(branch.orElseThrow().getClients().contains(client));
+        assertEquals(branch, client.getRegisteredAt());
+        assertTrue(branch.getClients().contains(client));
         assertTrue(client.getAccounts().isEmpty());
     }
 
     @Test
     public void testDeleteClient(){
-        Optional<Client> client = clientRepository.findById(1000L);
-        Branch branch = client.orElseThrow().getRegisteredAt();
+        Client client = clientRepository.findById(1000L).orElseThrow();
+        Branch branch = client.getRegisteredAt();
 
-        assertEquals(1, client.orElseThrow().getAccounts().size());
-        assertEquals(1, client.orElseThrow().getLoans().size());
+        assertEquals(1, client.getAccounts().size());
+        assertEquals(1, client.getLoans().size());
 
-        clientRepository.delete(client.orElseThrow());
+        clientRepository.delete(client);
 
         assertFalse(clientRepository.existsById(1000L));
         assertEquals(0, accountRepository.count());
         assertEquals(0, loanRepository.count());
-        assertFalse(branch.getClients().contains(client.orElseThrow()));
+        assertFalse(branch.getClients().contains(client));
     }
 }

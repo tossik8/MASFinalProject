@@ -13,12 +13,12 @@ import nikita.toropov.masfinalproject.repository.account.CheckingAccountReposito
 import nikita.toropov.masfinalproject.repository.account.InvestmentAccountRepository;
 import nikita.toropov.masfinalproject.repository.account.SavingsAccountRepository;
 import nikita.toropov.masfinalproject.repository.person.ClientRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -50,62 +50,66 @@ public class AccountRepositoryTest {
     @PersistenceContext
     private EntityManager entityManager;
 
+    Client client;
+
+    @BeforeEach
+    public void setup(){
+        client = clientRepository.findById(1000L).orElseThrow();
+    }
+
 
     @Test
     public void testCreateSavingsAccount(){
-        Optional<Client> client = clientRepository.findById(1000L);
         SavingsAccount account = SavingsAccount.builder()
-                .owner(client.orElseThrow())
+                .owner(client)
                 .interestRate(0.01f)
                 .build();
         accountRepository.save(account);
         entityManager.flush();
 
         assertEquals(0.01f, account.getInterestRate());
-        assertTrue(client.orElseThrow().getAccounts().contains(account));
-        assertEquals(client.orElseThrow(), account.getOwner());
+        assertTrue(client.getAccounts().contains(account));
+        assertEquals(client, account.getOwner());
         assertTrue(account.getAccountNumber().startsWith("61 1090 1014"));
         assertEquals(LocalDate.now(), account.getOpeningDate());
     }
 
     @Test
     public void testCreateCheckingAccount(){
-        Optional<Client> client = clientRepository.findById(1000L);
         CheckingAccount account = CheckingAccount.builder()
                 .overdraftLimit(100)
-                .owner(client.orElseThrow())
+                .owner(client)
                 .build();
         accountRepository.save(account);
         entityManager.flush();
 
         assertEquals(100, account.getOverdraftLimit());
-        assertTrue(client.orElseThrow().getAccounts().contains(account));
-        assertEquals(client.orElseThrow(), account.getOwner());
+        assertTrue(client.getAccounts().contains(account));
+        assertEquals(client, account.getOwner());
         assertTrue(account.getAccountNumber().startsWith("61 1090 1014"));
         assertEquals(LocalDate.now(), account.getOpeningDate());
     }
 
     @Test
     public void testCreateInvestmentAccount(){
-        Optional<Client> client = clientRepository.findById(1000L);
         InvestmentAccount account = InvestmentAccount.builder()
                 .investmentObjective("Safety")
-                .owner(client.orElseThrow()).build();
+                .owner(client).build();
         accountRepository.save(account);
         entityManager.flush();
 
         assertEquals("Safety", account.getInvestmentObjective());
-        assertTrue(client.orElseThrow().getAccounts().contains(account));
-        assertEquals(client.orElseThrow(), account.getOwner());
+        assertTrue(client.getAccounts().contains(account));
+        assertEquals(client, account.getOwner());
         assertTrue(account.getAccountNumber().startsWith("61 1090 1014"));
         assertEquals(LocalDate.now(), account.getOpeningDate());
     }
 
     @Test
     public void testFetchAccount(){
-        Optional<CheckingAccount> account1 = checkingAccountRepository.findById(1000L);
+        CheckingAccount account1 = checkingAccountRepository.findById(1000L).orElseThrow();
 
-        assertEquals(100, (account1.orElseThrow()).getOverdraftLimit());
+        assertEquals(100, (account1).getOverdraftLimit());
     }
 
     @Test
@@ -114,10 +118,9 @@ public class AccountRepositoryTest {
                 .name("Apple stock")
                 .code("APPL")
                 .build();
-        Optional<Client> client = clientRepository.findById(1000L);
         InvestmentAccount account = InvestmentAccount.builder()
                 .investmentObjective("Safety")
-                .owner(client.orElseThrow())
+                .owner(client)
                 .build();
         PurchasedSecurity purchasedSecurity = PurchasedSecurity.builder()
                 .security(security)
