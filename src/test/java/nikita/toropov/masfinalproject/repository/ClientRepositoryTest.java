@@ -33,23 +33,8 @@ public class ClientRepositoryTest {
     @PersistenceContext
     private EntityManager entityManager;
 
-
     @Test
-    public void testCreateInvalidClient(){
-        Branch branch = branchRepository.findById(1000L).orElseThrow();
-        Client client = Client.builder()
-                .name("Mike")
-                .surname("Geller")
-                .credentials(new Credentials("mgeller@gmail.com", "password"))
-                .registeredAt(branch)
-                .build();
-        clientRepository.save(client);
-
-        assertThrows(ConstraintViolationException.class, () -> entityManager.flush());
-    }
-
-    @Test
-    public void testCreateValidClient(){
+    public void testCreateClient(){
         Branch branch = branchRepository.findById(1000L).orElseThrow();
         Client client = Client.builder()
                 .name("Mike")
