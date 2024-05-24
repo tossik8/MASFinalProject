@@ -12,12 +12,12 @@ import nikita.toropov.masfinalproject.repository.account.AccountRepository;
 import nikita.toropov.masfinalproject.repository.account.CheckingAccountRepository;
 import nikita.toropov.masfinalproject.repository.account.InvestmentAccountRepository;
 import nikita.toropov.masfinalproject.repository.account.SavingsAccountRepository;
+import nikita.toropov.masfinalproject.repository.person.ClientRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

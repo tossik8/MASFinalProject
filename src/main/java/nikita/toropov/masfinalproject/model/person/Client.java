@@ -49,7 +49,6 @@ public class Client {
         setSurname(surname);
         setCredentials(credentials);
         setRegisteredAt(registeredAt);
-        accounts = new HashSet<>();
     }
 
     public List<Account> getAccounts() {

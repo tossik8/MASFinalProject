@@ -6,6 +6,7 @@ import nikita.toropov.masfinalproject.model.loan.Loan;
 import nikita.toropov.masfinalproject.model.loan.RevolvingLoan;
 import nikita.toropov.masfinalproject.model.loan.TermLoan;
 import nikita.toropov.masfinalproject.model.person.Client;
+import nikita.toropov.masfinalproject.repository.person.ClientRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

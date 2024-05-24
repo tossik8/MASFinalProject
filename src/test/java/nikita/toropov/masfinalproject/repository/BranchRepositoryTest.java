@@ -5,6 +5,7 @@ import jakarta.persistence.PersistenceContext;
 import nikita.toropov.masfinalproject.model.Branch;
 import nikita.toropov.masfinalproject.model.person.Client;
 import nikita.toropov.masfinalproject.model.person.Credentials;
+import nikita.toropov.masfinalproject.repository.person.ClientRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
