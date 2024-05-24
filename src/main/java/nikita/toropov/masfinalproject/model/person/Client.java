@@ -1,6 +1,7 @@
 package nikita.toropov.masfinalproject.model.person;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -30,8 +31,8 @@ public class Client {
     @NotBlank
     private String name, surname;
 
-    @NotNull
     @Embedded
+    @Valid
     private Credentials credentials;
 
     @ManyToOne

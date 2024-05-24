@@ -2,6 +2,7 @@ package nikita.toropov.masfinalproject.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.validation.ConstraintViolationException;
 import nikita.toropov.masfinalproject.model.Branch;
 import nikita.toropov.masfinalproject.model.person.Client;
 import nikita.toropov.masfinalproject.model.person.Credentials;
@@ -52,6 +53,44 @@ public class ClientRepositoryTest {
         assertEquals(branch, client.getRegisteredAt());
         assertTrue(branch.getClients().contains(client));
         assertTrue(client.getAccounts().isEmpty());
+    }
+
+    @Test
+    public void testUniqueEmail(){
+        Branch branch = branchRepository.findById(1000L).orElseThrow();
+        Client client = Client.builder()
+                .name("Mike")
+                .surname("Geller")
+                .credentials(new Credentials("mgeller@gmail.com", "123422423"))
+                .registeredAt(branch)
+                .build();
+
+        assertThrows(org.hibernate.exception.ConstraintViolationException.class, () -> {
+            clientRepository.save(client);
+            entityManager.flush();
+        });
+    }
+
+    @Test
+    public void testPasswordLength() {
+        Branch branch = branchRepository.findById(1000L).orElseThrow();
+        Client client = Client.builder()
+                .name("Mike")
+                .surname("Geller")
+                .credentials(new Credentials("mikegeller@gmail.com", "12345678"))
+                .registeredAt(branch)
+                .build();
+        clientRepository.save(client);
+        entityManager.flush();
+
+        assertTrue(clientRepository.existsById(client.getId()));
+
+        client.getCredentials().setPassword("1234");
+
+        assertThrows(ConstraintViolationException.class, () -> {
+            clientRepository.save(client);
+            entityManager.flush();
+        });
     }
 
     @Test
