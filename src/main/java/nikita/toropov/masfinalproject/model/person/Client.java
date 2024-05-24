@@ -10,8 +10,9 @@ import lombok.NoArgsConstructor;
 import nikita.toropov.masfinalproject.model.Branch;
 import nikita.toropov.masfinalproject.model.account.Account;
 import nikita.toropov.masfinalproject.model.loan.Loan;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -33,8 +34,9 @@ public class Client {
     @Embedded
     private Credentials credentials;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "branch_id", nullable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "branch_id")
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     private Branch registeredAt;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE)

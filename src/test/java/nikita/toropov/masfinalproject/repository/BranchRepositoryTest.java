@@ -60,4 +60,29 @@ public class BranchRepositoryTest {
         assertEquals(branch, client.getRegisteredAt());
         assertTrue(branch.getClients().contains(client));
     }
+
+    @Test
+    public void testDeleteBranch(){
+        Branch branch = Branch.builder()
+                .name("B")
+                .address("Koszykowa 86")
+                .build();
+        branchRepository.save(branch);
+        Client client = Client.builder()
+                .name("Mike")
+                .surname("Geller")
+                .credentials(new Credentials("fsfs", "fdsfsdffdsdf"))
+                .registeredAt(branch)
+                .build();
+        clientRepository.save(client);
+        entityManager.flush();
+        entityManager.refresh(branch);
+
+        branchRepository.delete(branch);
+        entityManager.flush();
+        entityManager.refresh(client);
+
+        assertFalse(branchRepository.existsById(branch.getId()));
+        assertNull(client.getRegisteredAt());
+    }
 }
