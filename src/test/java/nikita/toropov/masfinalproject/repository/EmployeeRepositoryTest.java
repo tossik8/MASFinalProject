@@ -249,4 +249,30 @@ public class EmployeeRepositoryTest {
         assertTrue(employee.getMentees().contains(intern));
         assertEquals(employee, intern.getMentor());
     }
+
+    @Test
+    public void testChangeSalary(){
+        FullTimeEmployee employee = FullTimeEmployee.builder()
+                .name("Mike")
+                .surname("Geller")
+                .salary(0)
+                .worksAt(branch)
+                .build();
+
+        assertEquals(0, employee.getSalary());
+
+        employee.setSalary(10000);
+
+        assertEquals(10000, employee.getSalary());
+        assertThrows(IllegalStateException.class, () -> employee.setSalary(15001));
+        assertThrows(IllegalStateException.class, () -> employee.setSalary(4999));
+
+        employee.setSalary(7000);
+
+        assertEquals(7000, employee.getSalary());
+
+        employee.setSalary(10500);
+
+        assertEquals(10500, employee.getSalary());
+    }
 }
