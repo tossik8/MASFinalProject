@@ -69,7 +69,7 @@ public class CollateralRepositoryTest {
     }
 
     @Test
-    public void deleteCollateral(){
+    public void testRemoveCollateral(){
         House collateral = House.builder()
                 .address("Koszykowa 86")
                 .area(67.8f)

@@ -43,7 +43,6 @@ public abstract class Employee {
     public void setSalary(int salary) {
         if (this.salary != 0) {
             float change = (float) salary / this.salary;
-            System.out.println(change);
             if (change < 0.5 || change > 1.5) {
                 throw new IllegalStateException("The salary is not allowed to change by this much");
             }

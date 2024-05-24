@@ -55,7 +55,7 @@ public class ClientRepositoryTest {
     }
 
     @Test
-    public void testDeleteClient(){
+    public void testRemoveClient(){
         Client client = clientRepository.findById(1000L).orElseThrow();
         Branch branch = client.getRegisteredAt();
 

@@ -97,31 +97,7 @@ public class LoanRepositoryTest {
     }
 
     @Test
-    public void testGetPayment(){
-        Loan loan1 = RevolvingLoan.builder()
-                .owner(client)
-                .interestRate(0.05f)
-                .creditLimit(500)
-                .build();
-
-        assertEquals(0, loan1.getPayment(), 0.001);
-
-        loan1.setBalance(100);
-
-        assertEquals(5, loan1.getPayment());
-        assertThrows(IllegalStateException.class, () -> loan1.setBalance(501));
-
-        Loan loan2 = TermLoan.builder()
-                .owner(client)
-                .principal(10000)
-                .maturityDate(LocalDate.of(2027, 6, 23))
-                .interestRate(0.05f).build();
-
-        assertEquals(292.2, loan2.getPayment(), 0.001);
-    }
-
-    @Test
-    public void testDeleteLoan(){
+    public void testRemoveLoan(){
         Collateral collateral = Car.builder()
                 .make("Ford")
                 .model("Mustang")

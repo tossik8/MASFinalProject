@@ -46,7 +46,7 @@ public class BranchRepositoryTest {
     }
 
     @Test
-    public void testDeleteBranch(){
+    public void testRemoveBranch(){
         Branch branch = Branch.builder()
                 .name("B")
                 .address("Koszykowa 86")
