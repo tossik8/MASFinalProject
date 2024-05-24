@@ -6,6 +6,8 @@ import jakarta.validation.constraints.Min;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import nikita.toropov.masfinalproject.model.person.Client;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
 
@@ -35,10 +37,15 @@ public abstract class Loan {
     @EqualsAndHashCode.Exclude
     private Client owner;
 
-    public Loan(Client owner, float balance, float interestRate) {
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @OnDelete(action = OnDeleteAction.SET_NULL)
+    private Collateral collateral;
+
+    public Loan(Client owner, float balance, float interestRate, Collateral collateral) {
         setOwner(owner);
         setBalance(balance);
         setInterestRate(interestRate);
+        setCollateral(collateral);
         openingDate = LocalDate.now();
     }
 

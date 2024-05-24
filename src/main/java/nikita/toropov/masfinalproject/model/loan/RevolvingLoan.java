@@ -16,8 +16,8 @@ public class RevolvingLoan extends Loan{
     private int creditLimit;
 
     @Builder
-    public RevolvingLoan(Client owner, int creditLimit, float interestRate) {
-        super(owner, 0, interestRate);
+    public RevolvingLoan(Client owner, int creditLimit, float interestRate, Collateral collateral) {
+        super(owner, 0, interestRate, collateral);
         setCreditLimit(creditLimit);
     }
 

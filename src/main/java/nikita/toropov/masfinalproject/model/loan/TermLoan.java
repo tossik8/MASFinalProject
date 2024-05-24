@@ -23,8 +23,8 @@ public class TermLoan extends Loan{
     private int principal;
 
     @Builder
-    public TermLoan(Client owner, int principal, float interestRate, LocalDate maturityDate) {
-        super(owner, principal, interestRate);
+    public TermLoan(Client owner, int principal, float interestRate, LocalDate maturityDate, Collateral collateral) {
+        super(owner, principal, interestRate, collateral);
         setPrincipal(principal);
         setMaturityDate(maturityDate);
     }

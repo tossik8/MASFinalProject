@@ -2,9 +2,7 @@ package nikita.toropov.masfinalproject.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import nikita.toropov.masfinalproject.model.loan.Loan;
-import nikita.toropov.masfinalproject.model.loan.RevolvingLoan;
-import nikita.toropov.masfinalproject.model.loan.TermLoan;
+import nikita.toropov.masfinalproject.model.loan.*;
 import nikita.toropov.masfinalproject.model.person.Client;
 import nikita.toropov.masfinalproject.repository.person.ClientRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,6 +22,9 @@ public class LoanRepositoryTest {
 
     @Autowired
     private ClientRepository clientRepository;
+
+    @Autowired
+    private CollateralRepository collateralRepository;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -52,18 +53,28 @@ public class LoanRepositoryTest {
         assertEquals(client, loan.getOwner());
         assertTrue(loanRepository.existsById(loan.getId()));
         assertTrue(client.getLoans().contains(loan));
+        assertNull(loan.getCollateral());
     }
 
     @Test
     public void testCreateTermLoan(){
+        Collateral collateral = Car.builder()
+                .make("Ford")
+                .model("Mustang")
+                .price(100000)
+                .yearBuilt(2000)
+                .build();
+        collateralRepository.save(collateral);
         TermLoan loan = TermLoan.builder()
                 .interestRate(0.05f)
                 .maturityDate(LocalDate.of(2025, 1, 1))
                 .owner(client)
                 .principal(10000)
+                .collateral(collateral)
                 .build();
         loanRepository.save(loan);
         entityManager.flush();
+        entityManager.refresh(collateral);
 
         assertEquals(0.05f, loan.getInterestRate());
         assertEquals(10000, loan.getPrincipal());
@@ -73,6 +84,8 @@ public class LoanRepositoryTest {
         assertEquals(client, loan.getOwner());
         assertTrue(loanRepository.existsById(loan.getId()));
         assertTrue(client.getLoans().contains(loan));
+        assertEquals(collateral, loan.getCollateral());
+        assertEquals(loan, collateral.getLoan());
     }
 
     @Test
@@ -105,5 +118,32 @@ public class LoanRepositoryTest {
                 .interestRate(0.05f).build();
 
         assertEquals(292.2, loan2.getPayment(), 0.001);
+    }
+
+    @Test
+    public void testDeleteLoan(){
+        Collateral collateral = Car.builder()
+                .make("Ford")
+                .model("Mustang")
+                .price(100000)
+                .yearBuilt(2000)
+                .build();
+        collateralRepository.save(collateral);
+        TermLoan loan = TermLoan.builder()
+                .interestRate(0.05f)
+                .maturityDate(LocalDate.of(2025, 1, 1))
+                .owner(client)
+                .principal(10000)
+                .collateral(collateral)
+                .build();
+        loanRepository.save(loan);
+        entityManager.flush();
+        entityManager.refresh(collateral);
+
+        loanRepository.delete(loan);
+        entityManager.flush();
+
+        assertFalse(loanRepository.existsById(loan.getId()));
+        assertFalse(collateralRepository.existsById(collateral.getId()));
     }
 }
