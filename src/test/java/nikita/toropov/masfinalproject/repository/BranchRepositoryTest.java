@@ -55,6 +55,7 @@ public class BranchRepositoryTest {
         clientRepository.save(client);
         entityManager.flush();
         entityManager.refresh(branch);
+        entityManager.refresh(client);
 
         assertEquals(branch, client.getRegisteredAt());
         assertTrue(branch.getClients().contains(client));

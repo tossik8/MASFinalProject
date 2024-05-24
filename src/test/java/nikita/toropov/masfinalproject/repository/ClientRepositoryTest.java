@@ -60,6 +60,7 @@ public class ClientRepositoryTest {
                 .build();
         clientRepository.save(client);
         entityManager.flush();
+        entityManager.refresh(client);
 
         assertEquals("Mike", client.getName());
         assertEquals("Geller", client.getSurname());
