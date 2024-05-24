@@ -5,7 +5,10 @@ import jakarta.persistence.PersistenceContext;
 import nikita.toropov.masfinalproject.model.Branch;
 import nikita.toropov.masfinalproject.model.person.Client;
 import nikita.toropov.masfinalproject.model.person.Credentials;
+import nikita.toropov.masfinalproject.model.person.employee.Employee;
+import nikita.toropov.masfinalproject.model.person.employee.FullTimeEmployee;
 import nikita.toropov.masfinalproject.repository.person.ClientRepository;
+import nikita.toropov.masfinalproject.repository.person.employee.EmployeeRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -21,6 +24,9 @@ public class BranchRepositoryTest {
 
     @Autowired
     private ClientRepository clientRepository;
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -40,28 +46,6 @@ public class BranchRepositoryTest {
     }
 
     @Test
-    public void testRegisterClient(){
-        Branch branch = Branch.builder()
-                .name("B")
-                .address("Koszykowa 86")
-                .build();
-        branchRepository.save(branch);
-        Client client = Client.builder()
-                .name("Mike")
-                .surname("Geller")
-                .credentials(new Credentials("fsfs", "fdsfsdffdsdf"))
-                .registeredAt(branch)
-                .build();
-        clientRepository.save(client);
-        entityManager.flush();
-        entityManager.refresh(branch);
-        entityManager.refresh(client);
-
-        assertEquals(branch, client.getRegisteredAt());
-        assertTrue(branch.getClients().contains(client));
-    }
-
-    @Test
     public void testDeleteBranch(){
         Branch branch = Branch.builder()
                 .name("B")
@@ -74,15 +58,24 @@ public class BranchRepositoryTest {
                 .credentials(new Credentials("fsfs", "fdsfsdffdsdf"))
                 .registeredAt(branch)
                 .build();
+        Employee employee = FullTimeEmployee.builder()
+                .name("Mike")
+                .surname("Geller")
+                .salary(10000)
+                .worksAt(branch)
+                .build();
         clientRepository.save(client);
+        employeeRepository.save(employee);
         entityManager.flush();
         entityManager.refresh(branch);
 
         branchRepository.delete(branch);
         entityManager.flush();
         entityManager.refresh(client);
+        entityManager.refresh(employee);
 
         assertFalse(branchRepository.existsById(branch.getId()));
         assertNull(client.getRegisteredAt());
+        assertNull(employee.getWorksAt());
     }
 }

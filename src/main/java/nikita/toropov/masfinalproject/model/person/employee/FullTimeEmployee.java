@@ -3,8 +3,8 @@ package nikita.toropov.masfinalproject.model.person.employee;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.*;
+import nikita.toropov.masfinalproject.model.Branch;
 
-import java.util.Collections;
 import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
@@ -20,11 +20,11 @@ public class FullTimeEmployee extends Employee {
     private Set<Intern> mentees;
 
     @Builder
-    public FullTimeEmployee(String name, String surname, int salary) {
-        super(name, surname, salary);
+    public FullTimeEmployee(String name, String surname, int salary, Branch worksAt) {
+        super(name, surname, salary, worksAt);
     }
 
     public FullTimeEmployee(Employee intern, int salary){
-        this(intern.getName(), intern.getSurname(), salary);
+        this(intern.getName(), intern.getSurname(), salary, intern.getWorksAt());
     }
 }

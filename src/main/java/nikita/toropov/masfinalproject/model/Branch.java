@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import nikita.toropov.masfinalproject.model.person.Client;
+import nikita.toropov.masfinalproject.model.person.employee.Employee;
 
 import java.util.Set;
 
@@ -26,6 +27,11 @@ public class Branch {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<Client> clients;
+
+    @OneToMany(mappedBy = "worksAt")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Set<Employee> employees;
 
     @Builder
     public Branch(String name, String address){
