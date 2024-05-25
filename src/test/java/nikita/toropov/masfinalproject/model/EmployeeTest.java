@@ -1,5 +1,6 @@
 package nikita.toropov.masfinalproject.model;
 
+import nikita.toropov.masfinalproject.model.person.Credentials;
 import nikita.toropov.masfinalproject.model.person.employee.FullTimeEmployee;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,6 +27,7 @@ public class EmployeeTest {
                 .name("Mike")
                 .surname("Geller")
                 .salary(0)
+                .credentials(new Credentials("employee3@company.com", "123422423"))
                 .worksAt(branch)
                 .build();
 

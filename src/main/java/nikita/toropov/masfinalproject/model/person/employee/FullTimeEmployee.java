@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.*;
 import nikita.toropov.masfinalproject.model.Branch;
+import nikita.toropov.masfinalproject.model.person.Credentials;
 
 import java.util.Set;
 
@@ -20,11 +21,11 @@ public class FullTimeEmployee extends Employee {
     private Set<Intern> mentees;
 
     @Builder
-    public FullTimeEmployee(String name, String surname, int salary, Branch worksAt) {
-        super(name, surname, salary, worksAt);
+    public FullTimeEmployee(String name, String surname, int salary, Credentials credentials, Branch worksAt) {
+        super(name, surname, salary, credentials, worksAt);
     }
 
     public FullTimeEmployee(Employee intern, int salary){
-        this(intern.getName(), intern.getSurname(), salary, intern.getWorksAt());
+        this(intern.getName(), intern.getSurname(), salary, intern.getCredentials(), intern.getWorksAt());
     }
 }

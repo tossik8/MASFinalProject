@@ -1,6 +1,7 @@
 package nikita.toropov.masfinalproject.model.person.employee;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -8,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import nikita.toropov.masfinalproject.model.Branch;
+import nikita.toropov.masfinalproject.model.person.Credentials;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -28,15 +30,21 @@ public abstract class Employee {
     @Min(0)
     private int salary;
 
+    @Embedded
+    @Valid
+    @NotNull
+    private Credentials credentials;
+
     @ManyToOne
     @JoinColumn(name = "branch_id")
     @OnDelete(action = OnDeleteAction.SET_NULL)
     private Branch worksAt;
 
-    public Employee(String name, String surname, int salary, @NotNull Branch worksAt) {
+    public Employee(String name, String surname, int salary, Credentials credentials, @NotNull Branch worksAt) {
         setName(name);
         setSurname(surname);
         setSalary(salary);
+        setCredentials(credentials);
         setWorksAt(worksAt);
     }
 

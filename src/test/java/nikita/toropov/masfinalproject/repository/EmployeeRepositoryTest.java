@@ -3,6 +3,7 @@ package nikita.toropov.masfinalproject.repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import nikita.toropov.masfinalproject.model.Branch;
+import nikita.toropov.masfinalproject.model.person.Credentials;
 import nikita.toropov.masfinalproject.model.person.employee.Employee;
 import nikita.toropov.masfinalproject.model.person.employee.FullTimeEmployee;
 import nikita.toropov.masfinalproject.model.person.employee.Intern;
@@ -50,6 +51,7 @@ public class EmployeeRepositoryTest {
                 .name("Mike")
                 .surname("Geller")
                 .salary(10000)
+                .credentials(new Credentials("employee@company.com", "123422423"))
                 .worksAt(branch)
                 .build();
         employeeRepository.save(employee);
@@ -58,6 +60,7 @@ public class EmployeeRepositoryTest {
         assertEquals("Mike", employee.getName());
         assertEquals("Geller", employee.getSurname());
         assertEquals(10000, employee.getSalary());
+        assertEquals("employee@company.com", employee.getCredentials().getEmail());
         assertEquals(branch, employee.getWorksAt());
         assertTrue(branch.getEmployees().contains(employee));
         assertTrue(employeeRepository.existsById(employee.getId()));
@@ -69,6 +72,7 @@ public class EmployeeRepositoryTest {
                 .name("Mike")
                 .surname("Geller")
                 .salary(5000)
+                .credentials(new Credentials("employee1@company.com", "123422423"))
                 .worksAt(branch)
                 .build();
         employeeRepository.save(employee);
@@ -77,6 +81,7 @@ public class EmployeeRepositoryTest {
         assertEquals("Mike", employee.getName());
         assertEquals("Geller", employee.getSurname());
         assertEquals(5000, employee.getSalary());
+        assertEquals("employee1@company.com", employee.getCredentials().getEmail());
         assertEquals(branch, employee.getWorksAt());
         assertTrue(branch.getEmployees().contains(employee));
         assertNull(employee.getMentor());
@@ -89,20 +94,22 @@ public class EmployeeRepositoryTest {
                 .name("Mike")
                 .surname("Geller")
                 .salary(10000)
+                .credentials(new Credentials("employee2@company.com", "123422423"))
                 .worksAt(branch)
                 .build();
         employeeRepository.save(employee);
         entityManager.flush();
 
         Intern intern = new Intern(employee, 4000, null);
-        employeeRepository.save(intern);
         employeeRepository.delete(employee);
         entityManager.flush();
+        employeeRepository.save(intern);
 
         assertTrue(employeeRepository.existsById(intern.getId()));
         assertFalse(employeeRepository.existsById(employee.getId()));
         assertEquals("Mike", intern.getName());
         assertEquals("Geller", intern.getSurname());
+        assertEquals("employee2@company.com", intern.getCredentials().getEmail());
         assertEquals(4000, intern.getSalary());
         assertEquals(branch, intern.getWorksAt());
         assertTrue(branch.getEmployees().contains(intern));
@@ -116,21 +123,23 @@ public class EmployeeRepositoryTest {
                 .surname("Geller")
                 .mentor(null)
                 .salary(4000)
+                .credentials(new Credentials("employee3@company.com", "123422423"))
                 .worksAt(branch)
                 .build();
         employeeRepository.save(intern);
         entityManager.flush();
 
         Employee employee = new FullTimeEmployee(intern, 10000);
-        employeeRepository.save(employee);
         employeeRepository.delete(intern);
         entityManager.flush();
+        employeeRepository.save(employee);
 
         assertTrue(employeeRepository.existsById(employee.getId()));
         assertFalse(employeeRepository.existsById(intern.getId()));
         assertEquals("Mike", employee.getName());
         assertEquals("Geller", employee.getSurname());
         assertEquals(10000, employee.getSalary());
+        assertEquals("employee3@company.com", employee.getCredentials().getEmail());
         assertEquals(branch, employee.getWorksAt());
         assertTrue(branch.getEmployees().contains(employee));
         assertFalse(branch.getEmployees().contains(intern));
@@ -142,6 +151,7 @@ public class EmployeeRepositoryTest {
                 .name("Mike")
                 .surname("Geller")
                 .salary(10000)
+                .credentials(new Credentials("employee4@company.com", "123422423"))
                 .worksAt(branch)
                 .build();
         Intern intern = Intern.builder()
@@ -149,6 +159,7 @@ public class EmployeeRepositoryTest {
                 .surname("Geller")
                 .mentor(employee)
                 .salary(4000)
+                .credentials(new Credentials("employe5@company.com", "123422423"))
                 .worksAt(branch)
                 .build();
         Intern intern2 = Intern.builder()
@@ -156,6 +167,7 @@ public class EmployeeRepositoryTest {
                 .surname("Geller")
                 .mentor(employee)
                 .salary(4000)
+                .credentials(new Credentials("employee6@company.com", "123422423"))
                 .worksAt(branch)
                 .build();
         employeeRepository.saveAll(List.of(employee, intern, intern2));
@@ -185,6 +197,7 @@ public class EmployeeRepositoryTest {
                 .name("Mike")
                 .surname("Geller")
                 .salary(10000)
+                .credentials(new Credentials("employee7@company.com", "123422423"))
                 .worksAt(branch)
                 .build();
         Intern intern = Intern.builder()
@@ -192,6 +205,7 @@ public class EmployeeRepositoryTest {
                 .surname("Geller")
                 .mentor(employee)
                 .salary(4000)
+                .credentials(new Credentials("employee8@company.com", "123422423"))
                 .worksAt(branch)
                 .build();
         Intern intern2 = Intern.builder()
@@ -199,6 +213,7 @@ public class EmployeeRepositoryTest {
                 .surname("Geller")
                 .mentor(employee)
                 .salary(4000)
+                .credentials(new Credentials("employee9@company.com", "123422423"))
                 .worksAt(branch)
                 .build();
         employeeRepository.saveAll(List.of(employee, intern, intern2));
@@ -225,6 +240,7 @@ public class EmployeeRepositoryTest {
                 .name("Mike")
                 .surname("Geller")
                 .salary(10000)
+                .credentials(new Credentials("employee10@company.com", "123422423"))
                 .worksAt(branch)
                 .build();
         Intern intern = Intern.builder()
@@ -232,6 +248,7 @@ public class EmployeeRepositoryTest {
                 .surname("Geller")
                 .mentor(null)
                 .salary(4000)
+                .credentials(new Credentials("employee11@company.com", "123422423"))
                 .worksAt(branch)
                 .build();
         employeeRepository.saveAll(Set.of(employee, intern));

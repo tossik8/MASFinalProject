@@ -62,6 +62,7 @@ public class BranchRepositoryTest {
                 .name("Mike")
                 .surname("Geller")
                 .salary(10000)
+                .credentials(new Credentials("employee3@company.com", "123422423"))
                 .worksAt(branch)
                 .build();
         clientRepository.save(client);

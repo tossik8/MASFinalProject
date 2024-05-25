@@ -33,6 +33,7 @@ public class Client {
 
     @Embedded
     @Valid
+    @NotNull
     private Credentials credentials;
 
     @ManyToOne
