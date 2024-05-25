@@ -37,7 +37,6 @@ public class CollateralRepositoryTest {
                 .yearBuilt(2000)
                 .build();
         collateralRepository.save(collateral);
-        entityManager.flush();
 
         assertTrue(collateralRepository.existsById(collateral.getId()));
         assertEquals("Ford", collateral.getMake());
@@ -57,7 +56,6 @@ public class CollateralRepositoryTest {
                 .yearBuilt(2000)
                 .build();
         collateralRepository.save(collateral);
-        entityManager.flush();
 
         assertTrue(collateralRepository.existsById(collateral.getId()));
         assertEquals("Koszykowa 86", collateral.getAddress());
@@ -87,6 +85,8 @@ public class CollateralRepositoryTest {
         loanRepository.save(loan);
         entityManager.flush();
         entityManager.refresh(collateral);
+
+        assertEquals(collateral, loan.getCollateral());
 
         collateralRepository.delete(collateral);
         entityManager.flush();

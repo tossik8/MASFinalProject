@@ -44,14 +44,13 @@ public class LoanRepositoryTest {
                 .owner(client)
                 .build();
         loanRepository.save(loan);
-        entityManager.flush();
 
+        assertTrue(loanRepository.existsById(loan.getId()));
         assertEquals(1000, loan.getCreditLimit());
         assertEquals(0.03f, loan.getInterestRate());
         assertEquals(0, loan.getBalance());
         assertEquals(LocalDate.now(), loan.getOpeningDate());
         assertEquals(client, loan.getOwner());
-        assertTrue(loanRepository.existsById(loan.getId()));
         assertTrue(client.getLoans().contains(loan));
         assertNull(loan.getCollateral());
     }

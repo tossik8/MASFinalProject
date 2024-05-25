@@ -118,7 +118,6 @@ public class ClientRepositoryTest {
                 .registeredAt(branch)
                 .build();
         clientRepository.save(client);
-        entityManager.flush();
 
         assertTrue(clientRepository.existsById(client.getId()));
 

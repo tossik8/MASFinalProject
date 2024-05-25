@@ -55,15 +55,14 @@ public class EmployeeRepositoryTest {
                 .worksAt(branch)
                 .build();
         employeeRepository.save(employee);
-        entityManager.flush();
 
+        assertTrue(employeeRepository.existsById(employee.getId()));
         assertEquals("Mike", employee.getName());
         assertEquals("Geller", employee.getSurname());
         assertEquals(10000, employee.getSalary());
         assertEquals("employee@company.com", employee.getCredentials().getEmail());
         assertEquals(branch, employee.getWorksAt());
         assertTrue(branch.getEmployees().contains(employee));
-        assertTrue(employeeRepository.existsById(employee.getId()));
     }
 
     @Test
@@ -76,8 +75,8 @@ public class EmployeeRepositoryTest {
                 .worksAt(branch)
                 .build();
         employeeRepository.save(employee);
-        entityManager.flush();
 
+        assertTrue(employeeRepository.existsById(employee.getId()));
         assertEquals("Mike", employee.getName());
         assertEquals("Geller", employee.getSurname());
         assertEquals(5000, employee.getSalary());
@@ -85,7 +84,6 @@ public class EmployeeRepositoryTest {
         assertEquals(branch, employee.getWorksAt());
         assertTrue(branch.getEmployees().contains(employee));
         assertNull(employee.getMentor());
-        assertTrue(employeeRepository.existsById(employee.getId()));
     }
 
     @Test
@@ -99,6 +97,8 @@ public class EmployeeRepositoryTest {
                 .build();
         employeeRepository.save(employee);
         entityManager.flush();
+
+        assertTrue(employeeRepository.existsById(employee.getId()));
 
         Intern intern = new Intern(employee, 4000, null);
         employeeRepository.delete(employee);
@@ -128,6 +128,8 @@ public class EmployeeRepositoryTest {
                 .build();
         employeeRepository.save(intern);
         entityManager.flush();
+
+        assertTrue(employeeRepository.existsById(intern.getId()));
 
         Employee employee = new FullTimeEmployee(intern, 10000);
         employeeRepository.delete(intern);
