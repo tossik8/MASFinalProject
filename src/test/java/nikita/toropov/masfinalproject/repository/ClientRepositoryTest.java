@@ -72,6 +72,43 @@ public class ClientRepositoryTest {
     }
 
     @Test
+    public void testEmailValue(){
+        Branch branch = branchRepository.findById(1000L).orElseThrow();
+        Client client = Client.builder()
+                .name("Mike")
+                .surname("Geller")
+                .credentials(new Credentials("plainaddress", "123422423"))
+                .registeredAt(branch)
+                .build();
+
+        assertThrows(ConstraintViolationException.class, () -> {
+            clientRepository.save(client);
+            entityManager.flush();
+        });
+
+        client.getCredentials().setEmail("username@domain..com");
+
+        assertThrows(ConstraintViolationException.class, () -> {
+            clientRepository.save(client);
+            entityManager.flush();
+        });
+
+        client.getCredentials().setEmail("@missing-username.com");
+
+        assertThrows(ConstraintViolationException.class, () -> {
+            clientRepository.save(client);
+            entityManager.flush();
+        });
+
+        client.getCredentials().setEmail("username@.com");
+
+        assertThrows(ConstraintViolationException.class, () -> {
+            clientRepository.save(client);
+            entityManager.flush();
+        });
+    }
+
+    @Test
     public void testPasswordLength() {
         Branch branch = branchRepository.findById(1000L).orElseThrow();
         Client client = Client.builder()

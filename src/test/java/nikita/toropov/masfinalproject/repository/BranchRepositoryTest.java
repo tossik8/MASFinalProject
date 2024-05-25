@@ -55,7 +55,7 @@ public class BranchRepositoryTest {
         Client client = Client.builder()
                 .name("Mike")
                 .surname("Geller")
-                .credentials(new Credentials("fsfs", "fdsfsdffdsdf"))
+                .credentials(new Credentials("mike@gmail.com", "fdsfsdffdsdf"))
                 .registeredAt(branch)
                 .build();
         Employee employee = FullTimeEmployee.builder()

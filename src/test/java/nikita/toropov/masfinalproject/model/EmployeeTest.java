@@ -1,7 +1,5 @@
 package nikita.toropov.masfinalproject.model;
 
-import nikita.toropov.masfinalproject.model.person.Client;
-import nikita.toropov.masfinalproject.model.person.Credentials;
 import nikita.toropov.masfinalproject.model.person.employee.FullTimeEmployee;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
