@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import nikita.toropov.masfinalproject.model.PurchasedSecurity;
 import nikita.toropov.masfinalproject.model.Security;
+import nikita.toropov.masfinalproject.model.account.Account;
 import nikita.toropov.masfinalproject.model.account.CheckingAccount;
 import nikita.toropov.masfinalproject.model.account.InvestmentAccount;
 import nikita.toropov.masfinalproject.model.person.Client;
@@ -68,6 +69,7 @@ public class AccountRepositoryTest {
         entityManager.flush();
 
         assertEquals(0.01f, account.getInterestRate());
+        assertEquals(Account.Status.ACTIVE, account.getStatus());
         assertTrue(client.getAccounts().contains(account));
         assertEquals(client, account.getOwner());
         assertTrue(account.getAccountNumber().startsWith("61 1090 1014"));
@@ -84,6 +86,7 @@ public class AccountRepositoryTest {
         entityManager.flush();
 
         assertEquals(100, account.getOverdraftLimit());
+        assertEquals(Account.Status.ACTIVE, account.getStatus());
         assertTrue(client.getAccounts().contains(account));
         assertEquals(client, account.getOwner());
         assertTrue(account.getAccountNumber().startsWith("61 1090 1014"));
@@ -99,6 +102,7 @@ public class AccountRepositoryTest {
         entityManager.flush();
 
         assertEquals("Safety", account.getInvestmentObjective());
+        assertEquals(Account.Status.ACTIVE, account.getStatus());
         assertTrue(client.getAccounts().contains(account));
         assertEquals(client, account.getOwner());
         assertTrue(account.getAccountNumber().startsWith("61 1090 1014"));

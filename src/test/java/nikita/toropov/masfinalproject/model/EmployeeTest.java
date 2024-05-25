@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class EmployeeTest {
 
-
     Branch branch;
 
     @BeforeEach

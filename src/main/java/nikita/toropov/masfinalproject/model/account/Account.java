@@ -1,6 +1,7 @@
 package nikita.toropov.masfinalproject.model.account;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import nikita.toropov.masfinalproject.model.person.Client;
@@ -17,6 +18,8 @@ import java.util.Set;
 @SuperBuilder
 public abstract class Account {
 
+    public enum Status {ACTIVE, INACTIVE, FROZEN, CLOSED}
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -31,6 +34,9 @@ public abstract class Account {
     @Column(updatable = false)
     private LocalDate openingDate;
 
+    @NotNull
+    private Status status;
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "owner_id", nullable = false)
     @ToString.Exclude
@@ -41,6 +47,7 @@ public abstract class Account {
         setOwner(owner);
         accountNumber = generateAccountNumber();
         openingDate = LocalDate.now();
+        status = Status.ACTIVE;
     }
 
     private static String generateAccountNumber() {
