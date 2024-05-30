@@ -1,5 +1,6 @@
 package nikita.toropov.masfinalproject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -26,11 +27,13 @@ public class Branch {
     @OneToMany(mappedBy = "registeredAt")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @JsonIgnore
     private Set<Client> clients;
 
     @OneToMany(mappedBy = "worksAt")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @JsonIgnore
     private Set<Employee> employees;
 
     @Builder

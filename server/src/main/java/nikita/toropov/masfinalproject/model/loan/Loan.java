@@ -1,7 +1,7 @@
 package nikita.toropov.masfinalproject.model.loan;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -35,6 +35,7 @@ public abstract class Loan {
     @JoinColumn(name = "owner_id", nullable = false, updatable = false)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @JsonIgnore
     private Client owner;
 
     @OneToOne(cascade = CascadeType.REMOVE)
@@ -49,5 +50,6 @@ public abstract class Loan {
         openingDate = LocalDate.now();
     }
 
+    @JsonIgnore
     public abstract float getPayment();
 }

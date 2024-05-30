@@ -1,5 +1,6 @@
 package nikita.toropov.masfinalproject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -26,6 +27,7 @@ public class Security {
     @OneToMany(mappedBy = "security", cascade = CascadeType.REMOVE)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @JsonIgnore
     private Set<PurchasedSecurity> purchasedSecurities;
 
     @Builder
