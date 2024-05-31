@@ -1,11 +1,21 @@
 import React from 'react'
-import { IAccount } from './Customers'
+
+export interface IAccount{
+  id: number
+  accountNumber: string
+  balance: number
+  openingDate: string
+  status: string
+  overdraftLimit?: number
+  interestRate?: number
+  investmentObjective?: string
+}
 
 interface AccountsProps{
   accounts: IAccount[]
 }
 
-const Accounts = ({accounts} : AccountsProps ) => {
+const Accounts = ({accounts} : AccountsProps) => {
   return (
     <table className="table-auto min-w-max">
       <thead className="sticky top-0 bg-white">
@@ -24,7 +34,7 @@ const Accounts = ({accounts} : AccountsProps ) => {
           <tr key={account.id}>
             <td className="border px-2">{account.accountNumber}</td>
             <td className="border px-2">{account.balance}</td>
-            <td className="border px-2">{account.openingDate.toDateString()}</td>
+            <td className="border px-2">{account.openingDate}</td>
             <td className="border px-2">{account.status}</td>
             <td className="border px-2">{account.overdraftLimit}</td>
             <td className="border px-2">{account.interestRate}</td>
