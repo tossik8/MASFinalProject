@@ -1,8 +1,6 @@
-"use client"
-
-import ClientCard from "@/components/ClientCard";
 import { useState } from "react";
-import Clients, { IClient } from "@/components/Clients";
+import Clients, { IClient } from "./components/Clients";
+import ClientCard from "./components/ClientCard";
 
 export default function Home() {
 

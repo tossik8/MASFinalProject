@@ -1,6 +1,5 @@
 import Accounts from './Accounts'
 import { IClient } from './Clients'
-import React from 'react'
 
 interface ClientCardProps{
   client: IClient,
