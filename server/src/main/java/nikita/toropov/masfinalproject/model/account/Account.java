@@ -54,11 +54,8 @@ public abstract class Account {
 
     private static String generateAccountNumber() {
         StringBuilder accountNumber = new StringBuilder();
-        accountNumber.append("61 1090 1014");
+        accountNumber.append("6110901014");
         for (int i = 0; i < 16; i++) {
-            if(i % 4 == 0){
-                accountNumber.append(' ');
-            }
             accountNumber.append((int) (Math.random() * 10));
         }
         if(accountNumbers.contains(accountNumber.toString())){
