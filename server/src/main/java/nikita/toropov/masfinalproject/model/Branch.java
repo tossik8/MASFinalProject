@@ -36,6 +36,12 @@ public class Branch {
     @JsonIgnore
     private Set<Employee> employees;
 
+    @OneToMany(mappedBy = "branch")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JsonIgnore
+    private Set<Machine> machines;
+
     @Builder
     public Branch(String name, String address){
         setName(name);

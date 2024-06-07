@@ -1,2 +1,2 @@
 ###
-GET http://localhost:8080/clients/all
+GET http://localhost:8080/clients

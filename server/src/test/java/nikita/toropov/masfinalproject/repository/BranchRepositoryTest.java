@@ -3,6 +3,7 @@ package nikita.toropov.masfinalproject.repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import nikita.toropov.masfinalproject.model.Branch;
+import nikita.toropov.masfinalproject.model.Machine;
 import nikita.toropov.masfinalproject.model.person.Client;
 import nikita.toropov.masfinalproject.model.person.Credentials;
 import nikita.toropov.masfinalproject.model.person.employee.Employee;
@@ -13,6 +14,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+
+import java.util.EnumSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,6 +30,9 @@ public class BranchRepositoryTest {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private MachineRepository machineRepository;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -65,8 +71,14 @@ public class BranchRepositoryTest {
                 .credentials(new Credentials("employee3@company.com", "123422423"))
                 .worksAt(branch)
                 .build();
+        Machine machine = Machine.builder()
+                .model("3000c")
+                .type(EnumSet.of(Machine.MachineType.WITHDRAWAL, Machine.MachineType.DEPOSIT))
+                .branch(branch)
+                .build();
         clientRepository.save(client);
         employeeRepository.save(employee);
+        machineRepository.save(machine);
         entityManager.flush();
         entityManager.refresh(branch);
 
@@ -74,9 +86,11 @@ public class BranchRepositoryTest {
         entityManager.flush();
         entityManager.refresh(client);
         entityManager.refresh(employee);
+        entityManager.refresh(machine);
 
         assertFalse(branchRepository.existsById(branch.getId()));
         assertNull(client.getRegisteredAt());
         assertNull(employee.getWorksAt());
+        assertNull(machine.getBranch());
     }
 }
