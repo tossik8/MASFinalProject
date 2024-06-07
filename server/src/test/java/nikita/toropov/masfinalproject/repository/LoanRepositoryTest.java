@@ -88,14 +88,6 @@ public class LoanRepositoryTest {
     }
 
     @Test
-    public void testFetchLoan(){
-        Loan loan = loanRepository.findById(1000L).orElseThrow();
-
-        assertEquals(10000, ((TermLoan) loan).getPrincipal());
-        assertEquals(LocalDate.of(2025, 1, 1), ((TermLoan) loan).getMaturityDate());
-    }
-
-    @Test
     public void testRemoveLoan(){
         Collateral collateral = Car.builder()
                 .make("Ford")

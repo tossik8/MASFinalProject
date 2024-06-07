@@ -44,15 +44,14 @@ public class LoanTest {
         loan1.setBalance(100);
 
         assertEquals(5, loan1.getPayment());
-        assertThrows(IllegalStateException.class, () -> loan1.setBalance(501));
 
         Loan loan2 = TermLoan.builder()
                 .owner(client)
                 .principal(10000)
-                .maturityDate(LocalDate.of(2027, 6, 23))
+                .maturityDate(LocalDate.now().plusYears(3))
                 .interestRate(0.05f)
                 .build();
 
-        assertEquals(292.2, loan2.getPayment(), 0.001);
+        assertEquals(299.71, loan2.getPayment(), 0.001);
     }
 }

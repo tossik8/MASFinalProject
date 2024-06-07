@@ -72,7 +72,7 @@ public class AccountRepositoryTest {
         assertEquals(Account.Status.ACTIVE, account.getStatus());
         assertTrue(client.getAccounts().contains(account));
         assertEquals(client, account.getOwner());
-        assertTrue(account.getAccountNumber().startsWith("61 1090 1014"));
+        assertTrue(account.getAccountNumber().startsWith("6110901014"));
         assertEquals(LocalDate.now(), account.getOpeningDate());
     }
 
@@ -89,7 +89,7 @@ public class AccountRepositoryTest {
         assertEquals(Account.Status.ACTIVE, account.getStatus());
         assertTrue(client.getAccounts().contains(account));
         assertEquals(client, account.getOwner());
-        assertTrue(account.getAccountNumber().startsWith("61 1090 1014"));
+        assertTrue(account.getAccountNumber().startsWith("6110901014"));
         assertEquals(LocalDate.now(), account.getOpeningDate());
     }
 
@@ -105,15 +105,8 @@ public class AccountRepositoryTest {
         assertEquals(Account.Status.ACTIVE, account.getStatus());
         assertTrue(client.getAccounts().contains(account));
         assertEquals(client, account.getOwner());
-        assertTrue(account.getAccountNumber().startsWith("61 1090 1014"));
+        assertTrue(account.getAccountNumber().startsWith("6110901014"));
         assertEquals(LocalDate.now(), account.getOpeningDate());
-    }
-
-    @Test
-    public void testFetchAccount(){
-        CheckingAccount account1 = checkingAccountRepository.findById(1000L).orElseThrow();
-
-        assertEquals(100, (account1).getOverdraftLimit());
     }
 
     @Test

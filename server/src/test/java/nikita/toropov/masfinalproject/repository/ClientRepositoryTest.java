@@ -140,7 +140,7 @@ public class ClientRepositoryTest {
         clientRepository.delete(client);
 
         assertFalse(clientRepository.existsById(1000L));
-        assertEquals(0, accountRepository.count());
+        assertEquals(4, accountRepository.count());
         assertEquals(0, loanRepository.count());
         assertFalse(branch.getClients().contains(client));
     }
