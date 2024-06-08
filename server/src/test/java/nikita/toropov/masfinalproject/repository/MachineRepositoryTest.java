@@ -2,6 +2,7 @@ package nikita.toropov.masfinalproject.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.validation.ConstraintViolationException;
 import nikita.toropov.masfinalproject.model.Branch;
 import nikita.toropov.masfinalproject.model.Machine;
 import org.junit.jupiter.api.Test;
@@ -72,6 +73,27 @@ public class MachineRepositoryTest {
         assertTrue(machine.getType()
                 .containsAll(EnumSet.of
                         (Machine.MachineType.WITHDRAWAL, Machine.MachineType.DEPOSIT)));
+    }
+
+    @Test
+    public void testCreateInvalidMachine(){
+        Machine depositMachine = Machine.builder()
+                .model("3000A")
+                .type(null)
+                .build();
+        Machine depositMachine2 = Machine.builder()
+                .model("3000A")
+                .type(EnumSet.noneOf(Machine.MachineType.class))
+                .build();
+
+        assertThrows(ConstraintViolationException.class, () -> {
+            machineRepository.save(depositMachine);
+            entityManager.flush();
+        });
+        assertThrows(ConstraintViolationException.class, () -> {
+            machineRepository.save(depositMachine2);
+            entityManager.flush();
+        });
     }
 
     @Test

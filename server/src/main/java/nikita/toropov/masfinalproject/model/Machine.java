@@ -1,9 +1,11 @@
 package nikita.toropov.masfinalproject.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import nikita.toropov.masfinalproject.model.account.Account;
 import org.hibernate.annotations.OnDelete;
@@ -31,6 +33,10 @@ public class Machine {
 
     @ElementCollection
     @CollectionTable(name = "machine_type", joinColumns = @JoinColumn(name = "machine_id"))
+    @Setter(AccessLevel.NONE)
+    @NotNull
+    @Size(min = 1, max = 2)
+    @Valid
     private Set<MachineType> type;
 
     @ManyToOne
@@ -42,14 +48,11 @@ public class Machine {
     public Machine(String model, EnumSet<MachineType> type, Branch branch){
         setModel(model);
         setBranch(branch);
-        if(type == null){
-            throw new IllegalArgumentException("Invalid type");
-        }
         this.type = type;
     }
 
     public void deposit(Account account, int amount){
-        if(!type.contains(MachineType.DEPOSIT)){
+        if(!getType().contains(MachineType.DEPOSIT)){
             throw new IllegalStateException("The machine does not support deposits");
         }
         if(account == null){
@@ -63,7 +66,7 @@ public class Machine {
     }
 
     public void withdraw(Account account, int amount){
-        if(!type.contains(MachineType.WITHDRAWAL)){
+        if(!getType().contains(MachineType.WITHDRAWAL)){
             throw new IllegalStateException("The machine does not support withdrawals");
         }
         if(account == null){
@@ -72,7 +75,7 @@ public class Machine {
         if(amount <= 0){
             throw new IllegalArgumentException("Invalid amount");
         }
-        if(balance < amount){
+        if(getBalance() < amount){
             System.out.println("The machine cannot dispense this amount");
             return;
         }
