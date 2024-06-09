@@ -15,7 +15,7 @@ interface AccountsProps{
 
 const Accounts = ({accounts} : AccountsProps) => {
   return (
-    <table className="table-auto min-w-max">
+    <table className="table-auto min-w-max w-full">
       <thead className="sticky top-0 bg-white">
         <tr>
           <th className="text-start border px-2">Account Number</th>
