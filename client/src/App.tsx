@@ -7,7 +7,7 @@ export default function Home() {
   const [selectedClient, setSelectedClient] = useState<IClient|null>()
 
   return (
-    <main className="relative w-full h-full max-w-screen-2xl flex justify-center items-center mx-auto">
+    <main className="relative w-full h-full max-w-screen-4xl flex justify-center items-center mx-auto">
       <section className="w-3/4 flex flex-col">
         <h1 className="text-center mb-20 text-4xl">Clients</h1>
         <div className="overflow-y-auto max-h-64">
