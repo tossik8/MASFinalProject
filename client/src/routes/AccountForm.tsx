@@ -6,6 +6,9 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
 interface IAccountForm{
   label: string
   placeholder: string
+  type: string
+  min?: number
+  minLength?: number
 }
 
 function AccountForm() {
@@ -16,16 +19,22 @@ function AccountForm() {
     if(type.name === "Checking account"){
       setAccountForm({
         "label": "What should be the overdraft limit?",
-        "placeholder": "Overdraft limit"
+        "placeholder": "Overdraft limit",
+        "type": "number",
+        "min": 0
       })
     }
     else if(type.name === "Investment account"){
       setAccountForm({
         "label": "What is the investement objective?",
-        "placeholder": "Investment objective"
+        "placeholder": "Investment objective",
+        "type": "text",
+        "minLength": 1
       })
     }
-    else{}
+    else{
+      const selectedClientId = JSON.parse(localStorage.getItem("selectedClientId")!)
+    }
   }
 
   return (
@@ -33,7 +42,7 @@ function AccountForm() {
       {accountForm?
       <form className="flex flex-col w-fit relative left-1/4 top-1/2 -translate-y-1/2">
         <label htmlFor={accountForm.label} className="font-semibold text-lg">{accountForm.label}</label>
-        <input id={accountForm.label} type="text" placeholder={accountForm.placeholder} className="mt-4 border-2 border-neutral-900 p-2"/>
+        <input id={accountForm.label} type={accountForm.type} min={accountForm.min} minLength={accountForm.minLength} placeholder={accountForm.placeholder} className="mt-4 border-2 border-neutral-900 p-2"/>
         <button type="submit" className="mt-4 border-2 w-fit py-2 px-8 border-2 border-neutral-900">Open <FontAwesomeIcon icon={faArrowRight} /> </button>
       </form> :
       <>

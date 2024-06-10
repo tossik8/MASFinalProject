@@ -11,7 +11,7 @@ export interface IClient{
 }
 
 interface ClientsProps{
-  onSelectClient: (customer: IClient) => void
+  onSelectClient: (client: IClient) => void
 }
 
 const Clients = ({onSelectClient} : ClientsProps) => {
