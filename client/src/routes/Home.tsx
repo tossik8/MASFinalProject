@@ -4,7 +4,7 @@ import ClientCard from "../components/ClientCard";
 
 export default function Home() {
 
-  const [selectedClient, setSelectedClient] = useState<IClient|null>()
+  const [selectedClient, setSelectedClient] = useState<IClient|null>(null)
 
   return (
     <main className="relative w-full h-full max-w-screen-4xl flex justify-center items-center mx-auto">

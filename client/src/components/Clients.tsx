@@ -16,7 +16,7 @@ interface ClientsProps{
 
 const Clients = ({onSelectClient} : ClientsProps) => {
 
-  const [clients, setClients] = useState<IClient[]>()
+  const [clients, setClients] = useState<IClient[]>(null!)
 
   useEffect(() => {
     async function fetchClients(){
