@@ -1,22 +1,15 @@
-import { useState } from "react";
-import Clients, { IClient } from "./components/Clients";
-import ClientCard from "./components/ClientCard";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./routes/Home";
+import AccountForm from "./routes/AccountForm";
 
-export default function Home() {
-
-  const [selectedClient, setSelectedClient] = useState<IClient|null>()
+export default function App() {
 
   return (
-    <main className="relative w-full h-full max-w-screen-4xl flex justify-center items-center mx-auto">
-      <section className="w-3/4 flex flex-col">
-        <h1 className="text-center mb-20 text-4xl">Clients</h1>
-        <div className="overflow-y-auto max-h-64">
-          <Clients onSelectClient={setSelectedClient}/>
-        </div>
-      </section>
-      {selectedClient? <ClientCard
-      client={selectedClient}
-      onSelectClient={setSelectedClient}/> : null}
-    </main>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/account_form" element={<AccountForm/>}/>
+      </Routes>
+    </BrowserRouter>
   )
 }

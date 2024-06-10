@@ -38,14 +38,14 @@ const Clients = ({onSelectClient} : ClientsProps) => {
         </tr>
       </thead>
       <tbody>
-        {clients? clients.map((client: IClient) => (
+        {clients?.map((client: IClient) => (
           <tr key={client.id} onClick={() => onSelectClient(client)} className="hover:bg-blue-300 hover:cursor-pointer">
             <td>{client.name}</td>
             <td>{client.surname}</td>
             <td>{client.credentials.email}</td>
             <td>{client.credentials.password}</td>
           </tr>
-        )) : null}
+        ))}
       </tbody>
     </table>
   )
