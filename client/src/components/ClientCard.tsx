@@ -23,7 +23,7 @@ const ClientCard = ({client, onSelectClient} : ClientCardProps) => {
     <div ref={outerDiv} className="absolute bg-black/50 w-full h-full" onClick={(handleCloseClick)}>
       <div className="relative flex flex-col w-2/3 bg-white top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 p-8">
         <h2 className="text-3xl text-center">Client Information</h2>
-        <button ref={closeButton} onClick={handleCloseClick} className='absolute right-4 top-4 bg-neutral-900 text-white p-2'>Close</button>
+        <button ref={closeButton} type="button" onClick={handleCloseClick} className='absolute right-4 top-4 bg-neutral-900 text-white p-2'>Close</button>
 
         <section className="mt-4 overflow-x-auto whitespace-nowrap">
           <h3 className="text-2xl">Personal Data</h3>
@@ -50,7 +50,7 @@ const ClientCard = ({client, onSelectClient} : ClientCardProps) => {
               <Accounts accounts={client.accounts}/>
           </div>
         </section>
-        <button className="p-2 bg-neutral-900 text-white relative left-1/2 -translate-x-1/2 mt-4 w-fit">+ Add account</button>
+        <button type="button" className="p-2 bg-neutral-900 text-white relative left-1/2 -translate-x-1/2 mt-4 w-fit">+ Add account</button>
       </div>
     </div>
   )
