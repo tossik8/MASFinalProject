@@ -6,9 +6,10 @@ import { useNavigate } from "react-router-dom"
 
 interface AccountFormProps{
   accountType: IAccountType|null
+  onSelectAccountType: (account: null) => void
 }
 
-export default function AccountForm({accountType} : AccountFormProps) {
+export default function AccountForm({accountType, onSelectAccountType} : AccountFormProps) {
 
   const navigate = useNavigate()
 
@@ -17,6 +18,7 @@ export default function AccountForm({accountType} : AccountFormProps) {
   const [investmentObjective, setInvestmentObjective] = useState<string>("")
 
   useEffect(() => {
+    console.log(accountType)
     if(accountType){
       document.getElementById("account form")?.classList.remove("hidden")
       if(accountType.name === "Checking account"){
@@ -107,6 +109,15 @@ export default function AccountForm({accountType} : AccountFormProps) {
     }
   }
 
+  const handleGoBackClick = () => {
+    document.getElementById("account form")?.classList.add("hidden")
+    const divs = document.getElementById("account form")?.getElementsByTagName("div")!
+    for(let div of divs){
+      div.classList.remove("hidden")
+    }
+    onSelectAccountType(null)
+  }
+
   return (
     <form id="account form" className="flex flex-col w-fit relative left-1/4 top-1/2 -translate-y-1/2 hidden">
       <div id="checking account" className="flex flex-col">
@@ -133,7 +144,12 @@ export default function AccountForm({accountType} : AccountFormProps) {
         type="text" placeholder="Investment objective" className="mt-1 border-2 border-neutral-900 p-2"/>
         <p id="investment objective error" className="invisible text-sm text-red-500">Invalid value</p>
       </div>
-      <button type="submit" onClick={handleAccountFormSubmit} className="mt-5 border-2 w-fit py-2 px-8 border-2 border-neutral-900">Open <FontAwesomeIcon icon={faArrowRight} /> </button>
+      <div className="mt-2">
+        <button type="button" className="py-2 px-8 bg-neutral-900 text-white border-2 border-neutral-900"
+        onClick={handleGoBackClick}>Back</button>
+        <button type="submit" onClick={handleAccountFormSubmit}
+        className="border-2 w-fit py-2 px-8 border-2 border-neutral-900">Open <FontAwesomeIcon icon={faArrowRight}/></button>
+      </div>
     </form>
   )
 }

@@ -13,7 +13,7 @@ function NewAccount() {
         <h2 className="text-2xl">Choose account type</h2>
         <AccountTypes onSelectAccountType={setAccountType}/>
       </>}
-      <AccountForm accountType={accountType}/>
+      <AccountForm accountType={accountType} onSelectAccountType={setAccountType}/>
     </main>
   )
 }
