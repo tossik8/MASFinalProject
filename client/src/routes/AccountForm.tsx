@@ -32,8 +32,13 @@ function AccountForm() {
         "minLength": 1
       })
     }
-    else{
-      const selectedClientId = JSON.parse(localStorage.getItem("selectedClientId")!)
+    else if(type.name === "Savings account"){
+      setAccountForm({
+        "label": "What should be the interest rate?",
+        "placeholder": "Interest rate",
+        "type": "number",
+        "min": 0
+      })
     }
   }
 
