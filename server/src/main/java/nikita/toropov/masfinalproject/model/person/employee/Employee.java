@@ -40,7 +40,7 @@ public abstract class Employee {
     @OnDelete(action = OnDeleteAction.SET_NULL)
     private Branch worksAt;
 
-    public Employee(String name, String surname, int salary, Credentials credentials, @NotNull Branch worksAt) {
+    public Employee(String name, String surname, int salary, Credentials credentials, Branch worksAt) {
         setName(name);
         setSurname(surname);
         setSalary(salary);
@@ -48,6 +48,12 @@ public abstract class Employee {
         setWorksAt(worksAt);
     }
 
+    /**
+     * Updates the employee's salary, enforcing restrictions on salary changes.
+     *
+     * @param salary The new salary for the employee.
+     * @throws IllegalStateException if the salary change is outside the allowed range (less than 50% decrease or more than 50% increase).
+     */
     public void setSalary(int salary) {
         if (this.salary != 0) {
             float change = (float) salary / this.salary;

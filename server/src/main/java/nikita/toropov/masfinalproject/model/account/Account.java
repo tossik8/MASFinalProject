@@ -52,6 +52,11 @@ public abstract class Account {
         status = Status.ACTIVE;
     }
 
+    /**
+     * Generates a unique 26-digit account number.
+     *
+     * @return A unique 26-digit account number string.
+     */
     private static String generateAccountNumber() {
         StringBuilder accountNumber = new StringBuilder();
         accountNumber.append("6110901014");
@@ -64,6 +69,12 @@ public abstract class Account {
         return accountNumber.toString();
     }
 
+    /**
+     * Sets the account balance, ensuring it's non-negative.
+     *
+     * @param balance The new balance for the account (must be non-negative).
+     * @throws IllegalArgumentException if the provided balance is less than zero.
+     */
     public void setBalance(float balance){
         if(balance < 0){
             throw new IllegalArgumentException("Balance cannot be negative");

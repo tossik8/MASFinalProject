@@ -51,6 +51,14 @@ public class Machine {
         this.type = type;
     }
 
+    /**
+     * Attempts to deposit a specified amount into an account, considering ATM limitations.
+     *
+     * @param account The account to deposit funds into.
+     * @param amount The amount to deposit (must be positive).
+     * @throws IllegalStateException if the ATM does not support deposits.
+     * @throws IllegalArgumentException if the account is null or the amount is not positive.
+     */
     public void deposit(Account account, int amount){
         if(!getType().contains(MachineType.DEPOSIT)){
             throw new IllegalStateException("The machine does not support deposits");
@@ -65,6 +73,14 @@ public class Machine {
         setBalance(getBalance() + amount);
     }
 
+    /**
+     * Attempts to withdraw a specified amount from an account, considering ATM limitations and balance.
+     *
+     * @param account The account from which to withdraw funds.
+     * @param amount The amount to withdraw (must be positive).
+     * @throws IllegalStateException if the ATM does not support withdrawals.
+     * @throws IllegalArgumentException if the account is null or the amount is not positive.
+     */
     public void withdraw(Account account, int amount){
         if(!getType().contains(MachineType.WITHDRAWAL)){
             throw new IllegalStateException("The machine does not support withdrawals");

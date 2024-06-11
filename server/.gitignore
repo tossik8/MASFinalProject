@@ -5,6 +5,7 @@ target/
 !**/src/test/**/target/
 /data
 /.mvn
+/docs
 
 ### STS ###
 .apt_generated

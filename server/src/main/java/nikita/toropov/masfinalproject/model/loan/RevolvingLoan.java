@@ -29,10 +29,21 @@ public class RevolvingLoan extends Loan{
         super.setBalance(balance);
     }
 
+    /**
+     * Calculates the minimum payment for the loan.
+     *
+     * @return The minimum payment amount (rounded to two decimal places).
+     */
     private float getMinimumPayment(){
         return Math.round(this.getBalance() * this.getInterestRate() * 100) / 100.0f;
     }
 
+    /**
+     * Calculates the payment for the loan.
+     *
+     * @return The calculated payment amount (rounded to two decimal places).
+     * @see #getMinimumPayment()
+     */
     @Override
     public float getPayment() {
         return getMinimumPayment();

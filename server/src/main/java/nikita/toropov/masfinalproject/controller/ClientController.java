@@ -16,6 +16,12 @@ public class ClientController {
 
     private final ClientService clientService;
 
+    /**
+     * Retrieves a list of all clients.
+     *
+     * @return An iterable containing all client objects.
+     * @see #clientService
+     */
     @GetMapping
     public Iterable<Client> getClients(){
         return clientService.getClients();

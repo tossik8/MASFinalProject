@@ -55,6 +55,11 @@ public class Client {
         setRegisteredAt(registeredAt);
     }
 
+    /**
+     * Retrieves a list of all accounts, sorted by opening date in ascending order.
+     *
+     * @return A list of accounts sorted by their opening date (ascending order).
+     */
     public List<Account> getAccounts() {
         return accounts.stream()
                 .sorted((o1, o2) -> o1.getOpeningDate().isBefore(o2.getOpeningDate()) ? -1 :

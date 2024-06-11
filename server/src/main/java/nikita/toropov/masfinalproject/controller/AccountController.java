@@ -14,6 +14,12 @@ public class AccountController {
 
     private final AccountService accountService;
 
+    /**
+     * Creates a new account based on the provided data.
+     *
+     * @param newAccountData The data required to create a new account (must be a valid `@Valid` and `@RequestBody` object).
+     * @see #accountService
+     */
     @PostMapping
     public void createAccount(@Valid @RequestBody NewAccountData newAccountData){
         accountService.createAccount(newAccountData);

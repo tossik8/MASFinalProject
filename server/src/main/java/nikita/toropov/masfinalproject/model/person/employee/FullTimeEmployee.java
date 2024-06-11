@@ -25,6 +25,12 @@ public class FullTimeEmployee extends Employee {
         super(name, surname, salary, credentials, worksAt);
     }
 
+    /**
+     * Alternative constructor for FullTimeEmployee objects.
+     *
+     * @param intern The employee object (likely an Intern) serving as the base for the full-time employee information.
+     * @param salary The full-time employee's salary.
+     */
     public FullTimeEmployee(Employee intern, int salary){
         this(intern.getName(), intern.getSurname(), salary, intern.getCredentials(), intern.getWorksAt());
     }

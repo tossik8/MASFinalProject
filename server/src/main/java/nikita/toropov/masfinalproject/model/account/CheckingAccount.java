@@ -21,6 +21,12 @@ public class CheckingAccount extends Account{
         setOverdraftLimit(overdraftLimit);
     }
 
+    /**
+     * Sets the account balance, ensuring it stays above the overdraft limit.
+     *
+     * @param balance The new balance (must be greater than or equal to -overdraftLimit).
+     * @throws IllegalStateException if the balance falls below the overdraft limit.
+     */
     @Override
     public void setBalance(float balance) {
         if(balance < -overdraftLimit){

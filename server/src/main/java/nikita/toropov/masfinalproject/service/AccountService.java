@@ -19,6 +19,12 @@ public class AccountService {
     private final ClientService clientService;
     private final AccountRepository accountRepository;
 
+    /**
+     * Creates a new account based on the provided data and associates it with a client.
+     *
+     * @param newAccountData The data required to create a new account, including client ID, account type, and relevant details.
+     * @throws ResponseStatusException with HttpStatus.BAD_REQUEST if the account type is invalid.
+     */
     public void createAccount(NewAccountData newAccountData){
         Client client = clientService.getClient(newAccountData.getClientId());
         String type = newAccountData.getType();
