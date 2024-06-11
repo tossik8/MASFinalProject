@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./routes/Home";
-import AccountForm from "./routes/AccountForm";
+import NewAccount from "./routes/NewAccount";
 
 export default function App() {
 
@@ -8,7 +8,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/account_form" element={<AccountForm/>}/>
+        <Route path="/new_account" element={<NewAccount/>}/>
       </Routes>
     </BrowserRouter>
   )

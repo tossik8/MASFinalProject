@@ -53,7 +53,7 @@ const ClientCard = ({client, onSelectClient} : ClientCardProps) => {
               <Accounts accounts={client.accounts}/>
           </div>
         </section>
-        <button type="button" onClick={() => navigate("/account_form")} className="p-2 bg-neutral-900 text-white relative left-1/2 -translate-x-1/2 mt-4 w-fit">+ Add account</button>
+        <button type="button" onClick={() => navigate("/new_account")} className="p-2 bg-neutral-900 text-white relative left-1/2 -translate-x-1/2 mt-4 w-fit">+ Add account</button>
       </div>
     </div>
   )
