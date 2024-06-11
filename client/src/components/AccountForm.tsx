@@ -34,6 +34,33 @@ export default function AccountForm({accountType} : AccountFormProps) {
     }
   }, [accountType])
 
+  function validateCheckingAccountForm(){
+    if(parseInt(overdraftLimit) < 0 || overdraftLimit.trim().length === 0){
+      document.getElementById("overdraft limit error")?.classList.remove("invisible")
+      setOverdraftLimit("")
+      return false
+    }
+    return true
+  }
+
+  function validateSavingsAccountForm(){
+    if(parseFloat(interestRate) < 0 || interestRate.trim().length === 0){
+      document.getElementById("interest rate error")?.classList.remove("invisible")
+      setInterestRate("")
+      return false
+    }
+    return true
+  }
+
+  function validateInvestmentAccountForm(){
+    if(investmentObjective.trim().length === 0){
+      document.getElementById("investment objective error")?.classList.remove("invisible")
+      setInvestmentObjective("")
+      return false
+    }
+    return true
+  }
+
   const handleAccountFormSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     const parameters = {
@@ -44,6 +71,9 @@ export default function AccountForm({accountType} : AccountFormProps) {
       body: ""
     }
     if(accountType?.name === "Checking account"){
+      if(!validateCheckingAccountForm()){
+        return
+      }
       parameters.body = JSON.stringify({
         clientId: JSON.parse(localStorage.getItem("selectedClientId")!),
         type: "checking",
@@ -51,6 +81,9 @@ export default function AccountForm({accountType} : AccountFormProps) {
       })
     }
     else if(accountType?.name === "Savings account"){
+      if(!validateSavingsAccountForm()){
+        return
+      }
       parameters.body = JSON.stringify({
         clientId: JSON.parse(localStorage.getItem("selectedClientId")!),
         type: "savings",
@@ -58,6 +91,9 @@ export default function AccountForm({accountType} : AccountFormProps) {
       })
     }
     else if(accountType?.name === "Investment account"){
+      if(!validateInvestmentAccountForm()){
+        return
+      }
       parameters.body = JSON.stringify({
         clientId: JSON.parse(localStorage.getItem("selectedClientId")!),
         type: "investment",
@@ -75,15 +111,27 @@ export default function AccountForm({accountType} : AccountFormProps) {
     <form id="account form" className="flex flex-col w-fit relative left-1/4 top-1/2 -translate-y-1/2 hidden">
       <div id="checking account" className="flex flex-col">
         <label htmlFor="overdraft limit" className="font-semibold text-lg">What should be the overdraft limit?</label>
-        <input id="overdraft limit" value={overdraftLimit} onChange={(e) => setOverdraftLimit(e.currentTarget.value)} type="number" min="0" placeholder="Overdraft limit" className="mt-1 border-2 border-neutral-900 p-2"/>
+        <input id="overdraft limit" value={overdraftLimit}
+        onClick={() => document.getElementById("overdraft limit error")?.classList.add("invisible")}
+        onChange={(e) => setOverdraftLimit(e.currentTarget.value)}
+        type="number" min="0" placeholder="Overdraft limit" className="mt-1 border-2 border-neutral-900 p-2"/>
+        <p id="overdraft limit error" className="invisible text-sm text-red-500">Invalid value</p>
       </div>
       <div id="savings account" className="flex flex-col">
         <label htmlFor="interest rate" className="font-semibold text-lg">What should be the interest rate?</label>
-        <input id="interest rate" value={interestRate} onChange={(e) => setInterestRate(e.currentTarget.value)} type="number" min="0" placeholder="Interest rate" className="mt-1 border-2 border-neutral-900 p-2"/>
+        <input id="interest rate" value={interestRate}
+        onClick={() => document.getElementById("interest rate error")?.classList.add("invisible")}
+        onChange={(e) => setInterestRate(e.currentTarget.value)}
+        type="number" min="0" placeholder="Interest rate" className="mt-1 border-2 border-neutral-900 p-2" step={0.01}/>
+        <p id="interest rate error" className="invisible text-sm text-red-500">Invalid value</p>
       </div>
       <div id="investment account" className="flex flex-col">
         <label htmlFor="investment objective" className="font-semibold text-lg">What is the investment objective?</label>
-        <input id="investment objective" value={investmentObjective} onChange={(e) => setInvestmentObjective(e.currentTarget.value)} type="text" placeholder="Investment objective" className="mt-1 border-2 border-neutral-900 p-2"/>
+        <input id="investment objective" value={investmentObjective}
+        onClick={() => document.getElementById("investment objective error")?.classList.add("invisible")}
+        onChange={(e) => setInvestmentObjective(e.currentTarget.value)}
+        type="text" placeholder="Investment objective" className="mt-1 border-2 border-neutral-900 p-2"/>
+        <p id="investment objective error" className="invisible text-sm text-red-500">Invalid value</p>
       </div>
       <button type="submit" onClick={handleAccountFormSubmit} className="mt-5 border-2 w-fit py-2 px-8 border-2 border-neutral-900">Open <FontAwesomeIcon icon={faArrowRight} /> </button>
     </form>
