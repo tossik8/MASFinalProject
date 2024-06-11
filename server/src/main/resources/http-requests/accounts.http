@@ -1,0 +1,11 @@
+POST http://localhost:8080/accounts
+Content-Type: application/json
+
+{
+  "clientId": 1000,
+  "type": "checking",
+  "overdraftLimit": 300
+}
+
+###
+
