@@ -8,7 +8,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class NewAccountData {
+public class AccountCreationDto {
 
     private long clientId;
     @Min(0)
