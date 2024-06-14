@@ -39,6 +39,13 @@ public class ClientService {
         return clientDtos;
     }
 
+    /**
+     * Retrieves detailed information about a client including their accounts and branch details.
+     *
+     * @param id the unique identifier of the client whose details are to be retrieved.
+     * @return a {@code ClientDetailsDto} object containing detailed information about the client.
+     * @throws java.util.NoSuchElementException if no client with the specified {@code id} exists in the repository.
+     */
     public ClientDetailsDto getClientDetails(long id){
         Client client = clientRepository.findById(id).orElseThrow();
         List<AccountDto> accountDtos = client.getAccounts().stream()

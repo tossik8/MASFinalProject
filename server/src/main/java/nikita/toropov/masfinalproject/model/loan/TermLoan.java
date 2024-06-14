@@ -30,11 +30,11 @@ public class TermLoan extends Loan{
     }
 
     /**
-     * Sets the loan's maturity date.
+     * Sets the maturity date of the loan account.
      *
-     * @param maturityDate The date the loan matures (must not be null and must be after the opening date).
-     * @throws IllegalArgumentException if maturityDate is null.
-     * @throws IllegalStateException if maturityDate is before the loan's opening date.
+     * @param maturityDate the maturity date to set for the loan account.
+     * @throws IllegalArgumentException if the {@code maturityDate} is null.
+     * @throws IllegalStateException if the {@code maturityDate} is before the opening date of the account.
      */
     public void setMaturityDate(LocalDate maturityDate) {
         if(maturityDate == null){
@@ -47,9 +47,9 @@ public class TermLoan extends Loan{
     }
 
     /**
-     * Calculates total months between loan opening and maturity dates.
+     * Calculates the difference in months between the maturity date and the opening date of the account.
      *
-     * @return The total difference in months between the opening and maturity dates.
+     * @return the difference in months between the maturity date and the opening date.
      */
     private int calculateDifferenceInMonths(){
         int monthDifference = maturityDate.getMonthValue() - this.getOpeningDate().getMonthValue();
@@ -58,9 +58,9 @@ public class TermLoan extends Loan{
     }
 
     /**
-     * Calculates monthly loan payment using loan formula based on term and interest rate.
+     * Computes the monthly payment amount for the loan account using the amortization formula.
      *
-     * @return The calculated monthly loan payment amount (rounded to two decimal places).
+     * @return the calculated monthly payment amount for the loan account.
      */
     private float getLoanPayment(){
         int totalMonthDifference = calculateDifferenceInMonths();
@@ -70,11 +70,12 @@ public class TermLoan extends Loan{
         return Math.round(payment * 100) / 100.0f;
     }
 
+
     /**
-     * Delegates to getLoanPayment for calculating the full monthly payment.
+     * Retrieves the payment amount for the loan account.
      *
-     * @return The calculated monthly loan payment amount (rounded to two decimal places).
-     * @see #getLoanPayment()
+     * @return the calculated monthly payment amount for the loan account.
+     * {@link #getLoanPayment()}
      */
     @Override
     public float getPayment() {

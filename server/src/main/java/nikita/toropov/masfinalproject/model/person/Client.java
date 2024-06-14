@@ -56,9 +56,9 @@ public class Client {
     }
 
     /**
-     * Retrieves a list of all accounts, sorted by opening date in ascending order.
+     * Retrieves a sorted list of accounts based on their opening dates.
      *
-     * @return A list of accounts sorted by their opening date (ascending order).
+     * @return a sorted list of accounts based on their opening dates.
      */
     public List<Account> getAccounts() {
         return accounts.stream()

@@ -52,12 +52,12 @@ public class Machine {
     }
 
     /**
-     * Attempts to deposit a specified amount into an account, considering ATM limitations.
+     * Deposits a specified amount into the given account, updating the machine and account balances.
      *
-     * @param account The account to deposit funds into.
-     * @param amount The amount to deposit (must be positive).
-     * @throws IllegalStateException if the ATM does not support deposits.
-     * @throws IllegalArgumentException if the account is null or the amount is not positive.
+     * @param account the account into which to deposit the amount.
+     * @param amount the amount to deposit into the account, which must be greater than zero.
+     * @throws IllegalStateException if the machine does not support deposits.
+     * @throws IllegalArgumentException if the {@code account} is {@code null} or if the {@code amount} is not positive.
      */
     public void deposit(Account account, int amount){
         if(!getType().contains(MachineType.DEPOSIT)){
@@ -74,12 +74,12 @@ public class Machine {
     }
 
     /**
-     * Attempts to withdraw a specified amount from an account, considering ATM limitations and balance.
+     * Withdraws a specified amount from the given account, updating the machine and account balances.
      *
-     * @param account The account from which to withdraw funds.
-     * @param amount The amount to withdraw (must be positive).
-     * @throws IllegalStateException if the ATM does not support withdrawals.
-     * @throws IllegalArgumentException if the account is null or the amount is not positive.
+     * @param account the account from which to withdraw the amount.
+     * @param amount the amount to withdraw from the account, which must be greater than zero.
+     * @throws IllegalStateException if the machine does not support withdrawals.
+     * @throws IllegalArgumentException if the {@code account} is {@code null} or if the {@code amount} is not positive.
      */
     public void withdraw(Account account, int amount){
         if(!getType().contains(MachineType.WITHDRAWAL)){

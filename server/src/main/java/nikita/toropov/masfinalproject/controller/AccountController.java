@@ -15,10 +15,9 @@ public class AccountController {
     private final AccountService accountService;
 
     /**
-     * Creates a new account based on the provided data.
+     * Creates a new account using the validated data from {@code AccountCreationDto}.
      *
-     * @param accountCreationDto The data required to create a new account (must be a valid `@Valid` and `@RequestBody` object).
-     * @see #accountService
+     * @param accountCreationDto the data transfer object containing account creation details.
      */
     @PostMapping
     public void createAccount(@Valid @RequestBody AccountCreationDto accountCreationDto){

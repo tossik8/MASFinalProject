@@ -49,10 +49,10 @@ public abstract class Employee {
     }
 
     /**
-     * Updates the employee's salary, enforcing restrictions on salary changes.
+     * Sets the salary of the employee, ensuring it does not change excessively.
      *
-     * @param salary The new salary for the employee.
-     * @throws IllegalStateException if the salary change is outside the allowed range (less than 50% decrease or more than 50% increase).
+     * @param salary the new salary to set for the employee.
+     * @throws IllegalStateException if the change in salary exceeds the allowed range.
      */
     public void setSalary(int salary) {
         if (this.salary != 0) {

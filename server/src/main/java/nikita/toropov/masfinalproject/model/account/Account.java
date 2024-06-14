@@ -51,9 +51,9 @@ public abstract class Account {
     }
 
     /**
-     * Generates a unique 26-digit account number.
+     * Generates a unique 26-digit account number starting with "6110901014".
      *
-     * @return A unique 26-digit account number string.
+     * @return a unique 26-digit account number.
      */
     private static String generateAccountNumber() {
         StringBuilder accountNumber = new StringBuilder();
@@ -68,10 +68,10 @@ public abstract class Account {
     }
 
     /**
-     * Sets the account balance, ensuring it's non-negative.
+     * Sets the balance of the account.
      *
-     * @param balance The new balance for the account (must be non-negative).
-     * @throws IllegalArgumentException if the provided balance is less than zero.
+     * @param balance the non-negative balance to set for the account.
+     * @throws IllegalArgumentException if the specified {@code balance} is negative.
      */
     public void setBalance(float balance){
         if(balance < 0){

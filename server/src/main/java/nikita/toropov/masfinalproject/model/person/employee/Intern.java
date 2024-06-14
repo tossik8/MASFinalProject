@@ -29,11 +29,11 @@ public class Intern extends Employee {
     }
 
     /**
-     * Alternative constructor for Intern objects.
+     * Constructs an intern object based on an existing full-time employee's details, additional salary information, and a mentor.
      *
-     * @param fullTimeEmployee The full-time employee serving as the base for the intern information.
-     * @param salary The intern's salary.
-     * @param mentor The intern's assigned mentor (a FullTimeEmployee object).
+     * @param fullTimeEmployee the existing full-time employee from which to derive basic information.
+     * @param salary the salary to set for the intern.
+     * @param mentor the mentor assigned to the intern.
      */
     public Intern(Employee fullTimeEmployee, int salary, FullTimeEmployee mentor){
         this(fullTimeEmployee.getName(), fullTimeEmployee.getSurname(), salary,

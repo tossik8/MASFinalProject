@@ -30,19 +30,19 @@ public class RevolvingLoan extends Loan{
     }
 
     /**
-     * Calculates the minimum payment for the loan.
+     * Calculates the minimum payment based on the balance and interest rate.
      *
-     * @return The minimum payment amount (rounded to two decimal places).
+     * @return the calculated minimum payment for the account.
      */
     private float getMinimumPayment(){
         return Math.round(this.getBalance() * this.getInterestRate() * 100) / 100.0f;
     }
 
     /**
-     * Calculates the payment for the loan.
+     * Retrieves the payment amount for the account.
      *
-     * @return The calculated payment amount (rounded to two decimal places).
-     * @see #getMinimumPayment()
+     * @return the calculated minimum payment amount for the account.
+     * {@link #getMinimumPayment()}.
      */
     @Override
     public float getPayment() {

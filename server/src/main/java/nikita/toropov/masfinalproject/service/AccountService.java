@@ -21,11 +21,13 @@ public class AccountService {
     private final AccountRepository accountRepository;
 
     /**
-     * Creates a new account based on the provided data and associates it with a client.
+     * Creates a new account based on the provided {@code AccountCreationDto}.
      *
-     * @param accountCreationDto The data required to create a new account, including client ID, account type, and relevant details.
-     * @throws ResponseStatusException with HttpStatus.BAD_REQUEST if the account type is invalid.
-     * @throws java.util.NoSuchElementException if a client is not found
+     * @param accountCreationDto the data transfer object containing account creation details,
+     *                           including client ID and specific account type details.
+     * @throws java.util.NoSuchElementException if no client with the specified ID is found in the repository.
+     * @throws ResponseStatusException if the account type specified in {@code accountCreationDto}
+     *                                 is not recognized, resulting in a HTTP 400 (Bad Request) response.
      */
     public void createAccount(AccountCreationDto accountCreationDto){
         Client client = clientRepository.findById(accountCreationDto.getClientId()).orElseThrow();
