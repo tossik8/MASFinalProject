@@ -1,6 +1,5 @@
 package nikita.toropov.masfinalproject.model.account;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -42,7 +41,6 @@ public abstract class Account {
     @JoinColumn(name = "owner_id", nullable = false)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @JsonIgnore
     private Client owner;
 
     public Account(Client owner){

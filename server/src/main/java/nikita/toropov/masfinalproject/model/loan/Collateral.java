@@ -1,6 +1,5 @@
 package nikita.toropov.masfinalproject.model.loan;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.*;
@@ -27,7 +26,6 @@ public abstract class Collateral {
     @JoinColumn(name = "loan_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @JsonIgnore
     private Loan loan;
 
     public Collateral(int price, int yearBuilt){

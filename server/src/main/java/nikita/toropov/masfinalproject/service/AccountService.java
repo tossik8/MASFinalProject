@@ -1,7 +1,7 @@
 package nikita.toropov.masfinalproject.service;
 
 import lombok.RequiredArgsConstructor;
-import nikita.toropov.masfinalproject.dto.NewAccountData;
+import nikita.toropov.masfinalproject.dto.AccountCreationDto;
 import nikita.toropov.masfinalproject.model.account.Account;
 import nikita.toropov.masfinalproject.model.account.CheckingAccount;
 import nikita.toropov.masfinalproject.model.account.InvestmentAccount;
@@ -23,25 +23,25 @@ public class AccountService {
     /**
      * Creates a new account based on the provided data and associates it with a client.
      *
-     * @param newAccountData The data required to create a new account, including client ID, account type, and relevant details.
+     * @param accountCreationDto The data required to create a new account, including client ID, account type, and relevant details.
      * @throws ResponseStatusException with HttpStatus.BAD_REQUEST if the account type is invalid.
      * @throws java.util.NoSuchElementException if a client is not found
      */
-    public void createAccount(NewAccountData newAccountData){
-        Client client = clientRepository.findById(newAccountData.getClientId()).orElseThrow();
-        String type = newAccountData.getType();
+    public void createAccount(AccountCreationDto accountCreationDto){
+        Client client = clientRepository.findById(accountCreationDto.getClientId()).orElseThrow();
+        String type = accountCreationDto.getType();
         Account account = switch (type) {
             case "checking" -> CheckingAccount.builder()
                     .owner(client)
-                    .overdraftLimit(newAccountData.getOverdraftLimit())
+                    .overdraftLimit(accountCreationDto.getOverdraftLimit())
                     .build();
             case "savings" -> SavingsAccount.builder()
                     .owner(client)
-                    .interestRate(newAccountData.getInterestRate())
+                    .interestRate(accountCreationDto.getInterestRate())
                     .build();
             case "investment" -> InvestmentAccount.builder()
                     .owner(client)
-                    .investmentObjective(newAccountData.getInvestmentObjective())
+                    .investmentObjective(accountCreationDto.getInvestmentObjective())
                     .build();
             default -> throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         };
