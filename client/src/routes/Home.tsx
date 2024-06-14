@@ -1,18 +1,27 @@
 import { useState } from "react";
 import Clients, {IClient} from "../components/Clients";
 import ClientCard from "../components/ClientCard";
+import { IAccount } from "../components/Accounts";
+
+export interface ISelectedClient extends IClient{
+  registeredAt: {name: string, address: string}
+  accounts: IAccount[]
+}
 
 export default function Home() {
 
-  const [selectedClient, setSelectedClient] = useState<IClient|null>(null)
+  const [selectedClient, setSelectedClient] = useState<ISelectedClient|null>(null)
 
-  const handleSelectClient = (client: IClient|null) => {
-    setSelectedClient(client)
+  const handleSelectClient = async (client: IClient|null) => {
     if(client === null){
       localStorage.removeItem("selectedClientId")
+      setSelectedClient(null)
     }
     else{
       localStorage.setItem("selectedClientId", `${client.id}`)
+      const response = await fetch(`http://localhost:8080/clients/${client.id}`)
+      const data = await response.json()
+      setSelectedClient(data)
     }
   }
 

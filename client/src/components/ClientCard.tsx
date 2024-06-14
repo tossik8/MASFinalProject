@@ -1,10 +1,10 @@
 import { useRef } from 'react'
 import Accounts from './Accounts'
-import { IClient } from './Clients'
 import { useNavigate } from 'react-router-dom'
+import { ISelectedClient } from '../routes/Home'
 
 interface ClientCardProps{
-  client: IClient,
+  client: ISelectedClient,
   onSelectClient: (client: null) => void
 }
 

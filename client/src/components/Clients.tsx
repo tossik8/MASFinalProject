@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react'
-import { IAccount } from './Accounts'
 
 export interface IClient{
   id: number
   name: string
   surname: string
   email: string
-  registeredAt: {name: string, address: string}
-  accounts: IAccount[]
 }
 
 interface ClientsProps{

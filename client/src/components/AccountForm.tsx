@@ -18,7 +18,6 @@ export default function AccountForm({accountType, onSelectAccountType} : Account
   const [investmentObjective, setInvestmentObjective] = useState<string>("")
 
   useEffect(() => {
-    console.log(accountType)
     if(accountType){
       document.getElementById("account form")?.classList.remove("hidden")
       if(accountType.name === "Checking account"){
