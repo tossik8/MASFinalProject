@@ -36,8 +36,7 @@ const ClientCard = ({client, onSelectClient} : ClientCardProps) => {
               <p><span className="font-medium">Last name:</span> {client.surname}</p>
             </div>
             <div>
-              <p><span className="font-medium">Email:</span> {client.credentials.email}</p>
-              <p><span className="font-medium">Password:</span> {client.credentials.password}</p>
+              <p><span className="font-medium">Email:</span> {client.email}</p>
             </div>
           </div>
         </section>
