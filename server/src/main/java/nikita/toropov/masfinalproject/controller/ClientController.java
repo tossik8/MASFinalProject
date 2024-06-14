@@ -1,12 +1,10 @@
 package nikita.toropov.masfinalproject.controller;
 
 import lombok.RequiredArgsConstructor;
-import nikita.toropov.masfinalproject.dto.ClientDto;
+import nikita.toropov.masfinalproject.dto.person.ClientDetailsDto;
+import nikita.toropov.masfinalproject.dto.person.ClientDto;
 import nikita.toropov.masfinalproject.service.ClientService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
@@ -27,5 +25,10 @@ public class ClientController {
     @GetMapping
     public Set<ClientDto> getClients(){
         return clientService.getClients();
+    }
+
+    @GetMapping("/{id}")
+    public ClientDetailsDto getClientDetails(@PathVariable long id){
+        return clientService.getClientDetails(id);
     }
 }

@@ -1,4 +1,4 @@
-package nikita.toropov.masfinalproject.dto;
+package nikita.toropov.masfinalproject.dto.account;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

@@ -2,7 +2,7 @@ package nikita.toropov.masfinalproject.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import nikita.toropov.masfinalproject.dto.AccountCreationDto;
+import nikita.toropov.masfinalproject.dto.account.AccountCreationDto;
 import nikita.toropov.masfinalproject.service.AccountService;
 import org.springframework.web.bind.annotation.*;
 

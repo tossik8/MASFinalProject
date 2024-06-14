@@ -2,12 +2,16 @@ package nikita.toropov.masfinalproject.service;
 
 
 import lombok.RequiredArgsConstructor;
-import nikita.toropov.masfinalproject.dto.ClientDto;
+import nikita.toropov.masfinalproject.dto.BranchDto;
+import nikita.toropov.masfinalproject.dto.account.AccountDto;
+import nikita.toropov.masfinalproject.dto.person.ClientDetailsDto;
+import nikita.toropov.masfinalproject.dto.person.ClientDto;
 import nikita.toropov.masfinalproject.model.person.Client;
 import nikita.toropov.masfinalproject.repository.person.ClientRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -17,6 +21,8 @@ public class ClientService {
 
     private final ClientRepository clientRepository;
     private final ClientDtoMapper clientDtoMapper;
+    private final AccountDtoMapper accountDtoMapper;
+    private final BranchDtoMapper branchDtoMapper;
 
     /**
      * Retrieves all clients and maps them to a set of {@code ClientDto}.
@@ -31,5 +37,19 @@ public class ClientService {
             clientDtos.add(clientDto);
         }
         return clientDtos;
+    }
+
+    public ClientDetailsDto getClientDetails(long id){
+        Client client = clientRepository.findById(id).orElseThrow();
+        List<AccountDto> accountDtos = client.getAccounts().stream()
+                .map(accountDtoMapper)
+                .toList();
+        BranchDto branchDto = branchDtoMapper.apply(client.getRegisteredAt());
+        return new ClientDetailsDto(client.getId(),
+                client.getName(),
+                client.getSurname(),
+                client.getCredentials().getEmail(),
+                branchDto,
+                accountDtos);
     }
 }

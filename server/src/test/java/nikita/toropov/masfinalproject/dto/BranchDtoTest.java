@@ -18,7 +18,7 @@ public class BranchDtoTest {
     private BranchRepository branchRepository;
 
     @Test
-    public void testBranchToDto(){
+    public void testCreateBranchDto(){
         Branch branch = branchRepository.findById(1000L).orElseThrow();
         BranchDto branchDto = branchDtoMapper.apply(branch);
 

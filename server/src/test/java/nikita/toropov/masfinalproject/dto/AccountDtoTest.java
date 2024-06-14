@@ -22,7 +22,7 @@ public class AccountDtoTest {
     private AccountRepository accountRepository;
 
     @Test
-    public void testCheckingAccountToDto(){
+    public void testCreateCheckingAccountDto(){
         CheckingAccount account = (CheckingAccount) accountRepository.findById(1000L).orElseThrow();
         CheckingAccountDto checkingAccountDto = (CheckingAccountDto) accountDtoMapper.apply(account);
 
@@ -35,7 +35,7 @@ public class AccountDtoTest {
     }
 
     @Test
-    public void testSavingsAccountToDto(){
+    public void testCreateSavingsAccountDto(){
         SavingsAccount account = (SavingsAccount) accountRepository.findById(1002L).orElseThrow();
         SavingsAccountDto checkingAccountDto = (SavingsAccountDto) accountDtoMapper.apply(account);
 
@@ -48,7 +48,7 @@ public class AccountDtoTest {
     }
 
     @Test
-    public void testInvestmentAccountToDto(){
+    public void testCreateInvestmentAccountDto(){
         InvestmentAccount account = (InvestmentAccount) accountRepository.findById(1003L).orElseThrow();
         InvestmentAccountDto checkingAccountDto = (InvestmentAccountDto) accountDtoMapper.apply(account);
 

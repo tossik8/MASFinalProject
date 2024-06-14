@@ -1,7 +1,7 @@
 package nikita.toropov.masfinalproject.service;
 
 import lombok.RequiredArgsConstructor;
-import nikita.toropov.masfinalproject.dto.AccountCreationDto;
+import nikita.toropov.masfinalproject.dto.account.AccountCreationDto;
 import nikita.toropov.masfinalproject.model.account.Account;
 import nikita.toropov.masfinalproject.model.account.CheckingAccount;
 import nikita.toropov.masfinalproject.model.account.InvestmentAccount;
