@@ -15,6 +15,12 @@ import java.util.function.Function;
 @Service
 public class AccountDtoMapper implements Function<Account, AccountDto> {
 
+    /**
+     * Maps an {@code Account} entity to its corresponding {@code AccountDto} subtype.
+     *
+     * @param account the {@code Account} entity to be mapped.
+     * @return an {@code AccountDto} representing the mapped data, or {@code null} if the account type is not recognized.
+     */
     @Override
     public AccountDto apply(Account account) {
         if(account instanceof CheckingAccount){

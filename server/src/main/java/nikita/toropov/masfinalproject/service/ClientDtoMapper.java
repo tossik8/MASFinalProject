@@ -18,6 +18,12 @@ public class ClientDtoMapper implements Function<Client, ClientDto> {
     private final AccountDtoMapper accountDtoMapper;
     private final BranchDtoMapper branchDtoMapper;
 
+    /**
+     * Maps a {@code Client} entity to a {@code ClientDto}.
+     *
+     * @param client the {@code Client} entity to be mapped.
+     * @return a {@code ClientDto} containing the mapped data.
+     */
     @Override
     public ClientDto apply(Client client) {
         List<AccountDto> accountDtos = client.getAccounts().stream()

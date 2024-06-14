@@ -18,6 +18,11 @@ public class ClientService {
     private final ClientRepository clientRepository;
     private final ClientDtoMapper clientDtoMapper;
 
+    /**
+     * Retrieves all clients and maps them to a set of {@code ClientDto}.
+     *
+     * @return a set of {@code ClientDto} representing all clients.
+     */
     public Set<ClientDto> getClients(){
         Set<ClientDto> clientDtos = new HashSet<>();
         Iterable<Client> clients = clientRepository.findAll();
