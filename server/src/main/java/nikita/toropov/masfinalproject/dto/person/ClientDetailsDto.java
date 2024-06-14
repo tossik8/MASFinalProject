@@ -7,5 +7,5 @@ import java.util.List;
 
 public record ClientDetailsDto(long id, String name,
                                String surname, String email,
-                               BranchDto registeredAt, List<AccountDto> accountDtos) {
+                               BranchDto registeredAt, List<AccountDto> accounts) {
 }
