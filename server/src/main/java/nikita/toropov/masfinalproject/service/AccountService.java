@@ -8,6 +8,7 @@ import nikita.toropov.masfinalproject.model.account.InvestmentAccount;
 import nikita.toropov.masfinalproject.model.account.SavingsAccount;
 import nikita.toropov.masfinalproject.model.person.Client;
 import nikita.toropov.masfinalproject.repository.account.AccountRepository;
+import nikita.toropov.masfinalproject.repository.person.ClientRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -16,7 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 @RequiredArgsConstructor
 public class AccountService {
 
-    private final ClientService clientService;
+    private final ClientRepository clientRepository;
     private final AccountRepository accountRepository;
 
     /**
@@ -24,9 +25,10 @@ public class AccountService {
      *
      * @param newAccountData The data required to create a new account, including client ID, account type, and relevant details.
      * @throws ResponseStatusException with HttpStatus.BAD_REQUEST if the account type is invalid.
+     * @throws java.util.NoSuchElementException if a client is not found
      */
     public void createAccount(NewAccountData newAccountData){
-        Client client = clientService.getClient(newAccountData.getClientId());
+        Client client = clientRepository.findById(newAccountData.getClientId()).orElseThrow();
         String type = newAccountData.getType();
         Account account = switch (type) {
             case "checking" -> CheckingAccount.builder()
