@@ -1,4 +1,4 @@
-package nikita.toropov.masfinalproject.service;
+package nikita.toropov.masfinalproject.service.mapper;
 
 import nikita.toropov.masfinalproject.dto.account.AccountDto;
 import nikita.toropov.masfinalproject.dto.account.CheckingAccountDto;

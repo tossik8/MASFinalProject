@@ -1,4 +1,4 @@
-package nikita.toropov.masfinalproject.service;
+package nikita.toropov.masfinalproject.service.mapper;
 
 import nikita.toropov.masfinalproject.dto.BranchDto;
 import nikita.toropov.masfinalproject.model.Branch;

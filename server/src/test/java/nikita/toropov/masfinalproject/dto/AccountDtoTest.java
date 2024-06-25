@@ -7,7 +7,7 @@ import nikita.toropov.masfinalproject.model.account.CheckingAccount;
 import nikita.toropov.masfinalproject.model.account.InvestmentAccount;
 import nikita.toropov.masfinalproject.model.account.SavingsAccount;
 import nikita.toropov.masfinalproject.repository.account.AccountRepository;
-import nikita.toropov.masfinalproject.service.AccountDtoMapper;
+import nikita.toropov.masfinalproject.service.mapper.AccountDtoMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

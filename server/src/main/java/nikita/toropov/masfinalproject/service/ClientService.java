@@ -8,6 +8,9 @@ import nikita.toropov.masfinalproject.dto.person.ClientDetailsDto;
 import nikita.toropov.masfinalproject.dto.person.ClientDto;
 import nikita.toropov.masfinalproject.model.person.Client;
 import nikita.toropov.masfinalproject.repository.person.ClientRepository;
+import nikita.toropov.masfinalproject.service.mapper.AccountDtoMapper;
+import nikita.toropov.masfinalproject.service.mapper.BranchDtoMapper;
+import nikita.toropov.masfinalproject.service.mapper.ClientDtoMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;

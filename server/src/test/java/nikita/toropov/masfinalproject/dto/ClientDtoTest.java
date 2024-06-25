@@ -4,7 +4,7 @@ package nikita.toropov.masfinalproject.dto;
 import nikita.toropov.masfinalproject.dto.person.ClientDto;
 import nikita.toropov.masfinalproject.model.person.Client;
 import nikita.toropov.masfinalproject.repository.person.ClientRepository;
-import nikita.toropov.masfinalproject.service.ClientDtoMapper;
+import nikita.toropov.masfinalproject.service.mapper.ClientDtoMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

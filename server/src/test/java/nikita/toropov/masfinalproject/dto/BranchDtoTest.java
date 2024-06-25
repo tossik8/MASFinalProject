@@ -2,7 +2,7 @@ package nikita.toropov.masfinalproject.dto;
 
 import nikita.toropov.masfinalproject.model.Branch;
 import nikita.toropov.masfinalproject.repository.BranchRepository;
-import nikita.toropov.masfinalproject.service.BranchDtoMapper;
+import nikita.toropov.masfinalproject.service.mapper.BranchDtoMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
