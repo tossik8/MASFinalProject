@@ -65,7 +65,7 @@ public class TermLoan extends Loan{
     private float getLoanPayment(){
         int totalMonthDifference = calculateDifferenceInMonths();
         double monthlyRate = this.getInterestRate() / 12;
-        float payment = (float) (principal * (monthlyRate * Math.pow(1 + monthlyRate, totalMonthDifference) /
+        float payment = (float) (this.getPrincipal() * (monthlyRate * Math.pow(1 + monthlyRate, totalMonthDifference) /
                         (Math.pow(1 + monthlyRate, totalMonthDifference) - 1)));
         return Math.round(payment * 100) / 100.0f;
     }

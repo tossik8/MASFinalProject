@@ -55,8 +55,8 @@ public abstract class Employee {
      * @throws IllegalStateException if the change in salary exceeds the allowed range.
      */
     public void setSalary(int salary) {
-        if (this.salary != 0) {
-            float change = (float) salary / this.salary;
+        if (this.getSalary() != 0) {
+            float change = (float) salary / this.getSalary();
             if (change < 0.5 || change > 1.5) {
                 throw new IllegalStateException("The salary is not allowed to change by this much");
             }

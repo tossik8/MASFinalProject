@@ -29,7 +29,7 @@ public class CheckingAccount extends Account{
      */
     @Override
     public void setBalance(float balance) {
-        if(balance < -overdraftLimit){
+        if(balance < -this.getOverdraftLimit()){
             throw new IllegalStateException("Balance cannot smaller than the overdraft limit");
         }
         this.balance = balance;

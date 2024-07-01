@@ -23,7 +23,7 @@ public class RevolvingLoan extends Loan{
 
     @Override
     public void setBalance(float balance) {
-        if(balance > creditLimit){
+        if(balance > this.getCreditLimit()){
             throw new IllegalStateException("Balance cannot exceed credit limit");
         }
         super.setBalance(balance);
