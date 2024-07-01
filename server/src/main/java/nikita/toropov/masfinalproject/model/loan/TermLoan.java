@@ -7,6 +7,7 @@ import lombok.*;
 import nikita.toropov.masfinalproject.model.person.Client;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -52,9 +53,8 @@ public class TermLoan extends Loan{
      * @return the difference in months between the maturity date and the opening date.
      */
     private int calculateDifferenceInMonths(){
-        int monthDifference = maturityDate.getMonthValue() - this.getOpeningDate().getMonthValue();
-        int yearDifference = maturityDate.getYear() - this.getOpeningDate().getYear();
-        return yearDifference * 12 + monthDifference;
+        Period period = Period.between(this.getOpeningDate(), this.getMaturityDate());
+        return period.getMonths() + period.getYears() * 12;
     }
 
     /**
